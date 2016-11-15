@@ -18,7 +18,7 @@ MeshBuffer::MeshBuffer(const MeshBuffer &rhs) {
   lines = rhs.lines;
 }
 
-void MeshBuffer::addVertex(int i, vec4 v) {
+void MeshBuffer::addVertexAndLinkExisting(int i, vec4 v) {
   lines.push_back(*new Line(vector::at(i), v));
 }
 

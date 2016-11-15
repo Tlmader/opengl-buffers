@@ -15,12 +15,12 @@ class TriangleBuffer : public std::vector<vec4> {
 public:
   /**
    * Constructs a TriangleBuffer with a single Triangle.
-   * @param v1 a vertex
-   * @param v2 a vertex
-   * @param p3 a vertex
+   * @param v1 a vec4
+   * @param v2 a vec4
+   * @param p3 a vec4
    * @return the constructed Buffer
    */
-  TriangleBuffer(vec4 v1, vec4 v2, vec4 p3);
+  TriangleBuffer(vec4 a, vec4 b, vec4 c);
 
   /**
    * Returns a copy of this TriangleBuffer.
@@ -29,17 +29,25 @@ public:
   TriangleBuffer(const TriangleBuffer& rhs);
 
   /**
-   * Adds a edge to the buffer by linking existing Vertices to a new vertex.
-   * @param i an index for an existing vertex
-   * @param j an index for an existing vertex
+   * Adds a triplet of vertices for a new Triangle.
+   * @param a a vec4 to be added
+   * @param b a vec4 to be added
+   * @param c a vec4 to be added
+   */
+  void addVerticesForTriangle(vec4 a, vec4 b, vec4 c);
+
+  /**
+   * Adds a new Triangle by linking existing vertices to a new vertex.
+   * @param i an index for an existing vec4
+   * @param j an index for an existing vec4
    * @param v a vec4 to be added
    */
-  void addVertex(int i, int j, vec4 v);
+  void addVertexAndLinkExisting(int i, int j, vec4 v);
 
   /**
    * Modifies the position of a vertex by an index by replacing its coordinates
    * with those of another vec4.
-   * @param i an index for an existing vertex
+   * @param i an index for an existing vec4
    * @param v a vec4 with the new coordinates
    */
   void modifyVertex(int i, vec4 v);
@@ -47,7 +55,7 @@ public:
   /**
    * Returns a vector containing triplets of vertices for independent
    * triangles, to be used with GL_TRIANGLES.
-   * @return the vector of Vertices
+   * @return the vector of vec4
    */
   GLfloat* getVerticesForGlTriangles();
 
