@@ -24,6 +24,13 @@ public:
   TriangleBuffer(Point p1, Point p2, Point p3);
 
   /**
+   * Returns a copy of this TriangleBuffer.
+   *
+   * @return the copied TriangleBuffer
+   */
+  TriangleBuffer(const TriangleBuffer& rhs);
+
+  /**
    * Adds a edge to the buffer by linking an existing
    * Point to a new Point.
    *

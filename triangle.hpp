@@ -25,7 +25,7 @@ public:
    * Returns a copy of this Triangle.
    *
    * @param rhs this Triangle
-   * @return the Triangle
+   * @return the copied Triangle
    */
   Triangle(const Triangle& rhs);
 

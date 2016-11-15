@@ -28,7 +28,7 @@ public:
   /**
    * Returns a copy of this Point.
    *
-   * @return the Point
+   * @return the copied Point
    */
   Point(const Point& rhs);
   /**

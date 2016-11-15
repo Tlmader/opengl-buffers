@@ -24,7 +24,7 @@ public:
    * Returns a copy of this Line.
    *
    * @param rhs this Line
-   * @return the Line
+   * @return the copied Line
    */
   Line(const Line& rhs);
 

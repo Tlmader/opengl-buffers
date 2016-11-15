@@ -24,6 +24,13 @@ public:
   MeshBuffer(Point p1, Point p2, Point p3);
 
   /**
+   * Returns a copy of this MeshBuffer.
+   *
+   * @return the copied MeshBuffer
+   */
+  MeshBuffer(const MeshBuffer& rhs);
+
+  /**
    * Adds a edge to the buffer by linking an existing
    * Point to a new Point.
    *
