@@ -24,4 +24,5 @@ void TriangleBuffer::addPoint(int i, int j, Point p) {
 void TriangleBuffer::modifyPoint(int i, Point p) {
   vector::at(i).setX(p.getX());
   vector::at(i).setX(p.getY());
+  vector::at(i).setZ(p.getZ());
 }

@@ -23,4 +23,5 @@ void MeshBuffer::addPoint(int i, Point p) {
 void MeshBuffer::modifyPoint(int i, Point p) {
   vector::at(i).setX(p.getX());
   vector::at(i).setX(p.getY());
+  vector::at(i).setZ(p.getZ());
 }
