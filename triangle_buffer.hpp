@@ -2,7 +2,6 @@
 #define TRIANGLE_BUFFER_H
 
 #include <vector>
-#include "vertex.hpp"
 #include "triangle.hpp"
 #include "include/Angel.h"
 
@@ -11,7 +10,7 @@
  * @author Ted Mader
  * @date 2016-11-14
  */
-class TriangleBuffer : public std::vector<Vertex> {
+class TriangleBuffer : public std::vector<vec2> {
 
 public:
   /**
@@ -21,7 +20,7 @@ public:
    * @param p3 a vertex
    * @return the constructed Buffer
    */
-  TriangleBuffer(Vertex v1, Vertex v2, Vertex p3);
+  TriangleBuffer(vec2 v1, vec2 v2, vec2 p3);
 
   /**
    * Returns a copy of this TriangleBuffer.
@@ -30,27 +29,27 @@ public:
   TriangleBuffer(const TriangleBuffer& rhs);
 
   /**
-   * Adds a edge to the buffer by linking existing Vertices to a new Vertex.
+   * Adds a edge to the buffer by linking existing Vertices to a new vertex.
    * @param i an index for an existing vertex
    * @param j an index for an existing vertex
-   * @param v a Vertex to be added
+   * @param v a vec2 to be added
    */
-  void addVertex(int i, int j, Vertex v);
+  void addVertex(int i, int j, vec2 v);
 
   /**
-   * Modifies the position of a Vertex by an index by replacing its coordinates
-   * with those of another Vertex.
+   * Modifies the position of a vertex by an index by replacing its coordinates
+   * with those of another vec2.
    * @param i an index for an existing vertex
-   * @param v a Vertex with the new coordinates
+   * @param v a vec2 with the new coordinates
    */
-  void modifyVertex(int i, Vertex v);
+  void modifyVertex(int i, vec2 v);
 
   /**
    * Returns a vector containing triplets of vertices for independent
    * triangles, to be used with GL_TRIANGLES.
    * @return the vector of Vertices
    */
-  std::vector<Vertex> getVerticesForGlTriangles();
+  std::vector<vec2> getVerticesForGlTriangles();
 
 private:
   std::vector<Triangle> triangles;

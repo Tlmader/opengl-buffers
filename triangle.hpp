@@ -1,7 +1,7 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include "vertex.hpp"
+#include "include/Angel.h"
 
 /**
  * Contains function declarations for a Triangle.
@@ -12,13 +12,13 @@ class Triangle {
 
 public:
   /**
-   * Constructs a Triangle with the given Vertices.
-   * @param a a Vertex
-   * @param b a Vertex
-   * @param c a Vertex
+   * Constructs a Triangle with the given vertex.
+   * @param a a vec2
+   * @param b a vec2
+   * @param c a vec2
    * @return the constructed Triangle
    */
-  Triangle(Vertex a, Vertex b, Vertex c);
+  Triangle(vec2 a, vec2 b, vec2 c);
 
   /**
    * Returns a copy of this Triangle.
@@ -28,27 +28,27 @@ public:
   Triangle(const Triangle& rhs);
 
   /**
-   * Returns Vertex A of this Triangle.
-   * @return the Vertex for a
+   * Returns vertex A of this Triangle.
+   * @return the vec2 for a
    */
-  Vertex getA() const;
+  vec2 getA() const;
 
   /**
-   * Returns Vertex B of this Triangle.
-   * @return the Vertex for b
+   * Returns vertex B of this Triangle.
+   * @return the vec2 for b
    */
-  Vertex getB() const;
+  vec2 getB() const;
 
   /**
-   * Returns Vertex C of this Triangle.
-   * @return the Vertex for c
+   * Returns vertex C of this Triangle.
+   * @return the vec2 for c
    */
-  Vertex getC() const;
+  vec2 getC() const;
 
 private:
-  Vertex a;
-  Vertex b;
-  Vertex c;
+  vec2 a;
+  vec2 b;
+  vec2 c;
 };
 
 #endif

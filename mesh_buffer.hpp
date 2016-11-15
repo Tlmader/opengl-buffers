@@ -2,7 +2,6 @@
 #define MESH_BUFFER_H
 
 #include <vector>
-#include "vertex.hpp"
 #include "line.hpp"
 
 /**
@@ -10,7 +9,7 @@
  * @author Ted Mader
  * @date 2016-11-14
  */
-class MeshBuffer : public std::vector<Vertex> {
+class MeshBuffer : public std::vector<vec2> {
 
 public:
   /**
@@ -19,7 +18,7 @@ public:
    * @param v2 a vertex
    * @return the constructed Buffer
    */
-  MeshBuffer(Vertex v1, Vertex v2);
+  MeshBuffer(vec2 v1, vec2 v2);
 
   /**
    * Returns a copy of this MeshBuffer.
@@ -29,27 +28,27 @@ public:
 
   /**
    * Adds a edge to the buffer by linking an existing
-   * Vertex to a new Vertex.
+   * vertex to a new vertex.
    * @param i an index for an existing vertex
-   * @param v a Vertex to be added
+   * @param v a vec2 to be added
    */
-  void addVertex(int i, Vertex v);
+  void addVertex(int i, vec2 v);
 
   /**
-   * Modifies the position of a Vertex by an index by
+   * Modifies the position of a vertex by an index by
    * replacing its coordinates with those of another
-   * Vertex.
+   * vec2.
    * @param i an index for an existing vertex
-   * @param v a Vertex with the new coordinates
+   * @param v a vec2 with the new coordinates
    */
-  void modifyVertex(int i, Vertex v);
+  void modifyVertex(int i, vec2 v);
 
   /**
    * Returns a vector containing pairs of vertices for independent line
    * segments, to be used with GL_LINES.
    * @return the vector of Vertices
    */
-  std::vector<Vertex> getVerticesForGlLines();
+  std::vector<vec2> getVerticesForGlLines();
 
 private:
   std::vector<Line> lines;
