@@ -12,7 +12,7 @@ class Line {
 public:
 
   /**
-   * Returns a constructed Line with given Points.
+   * Returns a constructed Line with the given Points.
    */
   Line(Point a, Point b);
 
