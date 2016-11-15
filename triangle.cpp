@@ -1,7 +1,7 @@
 #include "Triangle.hpp"
 
 /**
- * Implements functions for Triangles.
+ * Implements functions for a Triangle.
  * @author Ted Mader
  * @date 2016-09-12
  */

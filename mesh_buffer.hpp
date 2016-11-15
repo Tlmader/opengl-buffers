@@ -5,7 +5,7 @@
 #include "point.hpp"
 
 /**
- * Contains function declarations for MeshBuffer objects.
+ * Contains function declarations for a MeshBuffer.
  * @author Ted Mader
  * @date 2016-11-14
  */
@@ -13,7 +13,7 @@ class MeshBuffer : public std::vector<Point> {
 
 public:
   /**
-   * Returns a constructed MeshBuffer object.
+   * Constructs a MeshBuffer.
    *
    * @param p1 a point
    * @param p2 a point

@@ -5,7 +5,7 @@
 #include "point.hpp"
 
 /**
- * Contains function declarations for TriangleBuffer objects.
+ * Contains function declarations for a TriangleBuffer.
  * @author Ted Mader
  * @date 2016-11-14
  */
@@ -13,7 +13,7 @@ class TriangleBuffer : public std::vector<Point> {
 
 public:
   /**
-   * Returns a constructed TriangleBuffer object.
+   * Constructs a TriangleBuffer.
    *
    * @param p1 a point
    * @param p2 a point

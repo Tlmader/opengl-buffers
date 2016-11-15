@@ -4,16 +4,15 @@
 #include "point.hpp"
 
 /**
- * Contains function declarations for Line objects.
+ * Contains function declarations a Line.
  * @author Ted Mader
  * @date 2016-11-14
  */
 class Line {
-public:
 
+public:
   /**
-   * Returns a constructed Line with the given
-   * Points.
+   * Constructs a Line with the given Points.
    *
    * @param a a Point
    * @param b a Point
@@ -25,7 +24,7 @@ public:
    * Returns a copy of this Line.
    *
    * @param rhs this Line
-   * @return the copy of this Line
+   * @return the Line
    */
   Line(const Line& rhs);
 

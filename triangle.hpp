@@ -4,16 +4,15 @@
 #include "point.hpp"
 
 /**
- * Contains function declarations for Triangle objects.
+ * Contains function declarations for a Triangle.
  * @author Ted Mader
  * @date 2016-11-14
  */
 class Triangle {
-public:
 
+public:
   /**
-   * Returns a constructed Triangle with the given
-   * Points.
+   * Constructs a Triangle with the given Points.
    *
    * @param a a Point
    * @param b a Point
@@ -26,7 +25,7 @@ public:
    * Returns a copy of this Triangle.
    *
    * @param rhs this Triangle
-   * @return the copy of this Triangle
+   * @return the Triangle
    */
   Triangle(const Triangle& rhs);
 

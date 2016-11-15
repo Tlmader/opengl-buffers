@@ -1,7 +1,7 @@
 #include "point.hpp"
 
 /**
- * Implements functions for Points.
+ * Implements functions for a Point.
  * @author Ted Mader
  * @date 2016-09-12
  */
