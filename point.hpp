@@ -2,7 +2,7 @@
 #define POINT_H
 
 /**
- * Contains function declarations for Points.
+ * Contains function declarations for Point objects.
  * @author Ted Mader
  * @date 2016-09-12
  */
