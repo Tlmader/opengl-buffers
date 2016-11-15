@@ -2,9 +2,9 @@
 #define POINT_H
 
 /**
- * Contains function declarations for a Point.
+ * Contains function declarations for a 3D Point.
  * @author Ted Mader
- * @date 2016-09-12
+ * @date 2016-11-14
  */
 class Point {
 
@@ -32,6 +32,7 @@ public:
    * @return the copied Point
    */
   Point(const Point& rhs);
+
   /**
    * Returns the x value of this Point.
    *
