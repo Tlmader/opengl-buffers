@@ -6,28 +6,26 @@
  * @date 2016-09-12
  */
 
-Triangle::Triangle(Point a, Point b, Point c) {
-  x = _x;
-  y = _y;
+Triangle::Triangle(Point _a, Point _b, Point _c) {
+  a = _a;
+  b = _b;
+  c = _c;
 }
 
 Triangle::Triangle(const Triangle &rhs) {
-  x = rhs.x;
-  y = rhs.y;
+  a = rhs.a;
+  b = rhs.b;
+  c = rhs.c;
 }
 
-double Triangle::getX() const {
-  return x;
+Point Triangle::getA() const {
+  return a;
 }
 
-void Triangle::setX(float _x) {
-  x = _x;
+Point Triangle::getB() const {
+  return b;
 }
 
-double Triangle::getY() const {
-  return y;
-}
-
-void Triangle::setY(float _y) {
-  y = _y;
+Point Triangle::getC() const {
+  return c;
 }
