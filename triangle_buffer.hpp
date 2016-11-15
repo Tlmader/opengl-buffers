@@ -34,10 +34,11 @@ public:
 
   /**
    * Modifies the position of a Point by an index by
-   * replacing it with a new Point.
+   * replacing its coordinates with those of another
+   * Point.
    *
    * @param i an index for an existing point
-   * @param p a Point to be added
+   * @param p a Point with the new coordinates
    */
   void modify(int i, Point p);
 };
