@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "point.hpp"
+#include "line.hpp"
 
 /**
  * Contains function declarations for a MeshBuffer.
@@ -29,7 +30,7 @@ public:
    * @param i an index for an existing point
    * @param p a Point to be added
    */
-  void add(int i, Point p);
+  void addPoint(int i, Point p);
 
   /**
    * Modifies the position of a Point by an index by
@@ -39,7 +40,10 @@ public:
    * @param i an index for an existing point
    * @param p a Point with the new coordinates
    */
-  void modify(int i, Point p);
+  void modifyPoint(int i, Point p);
+
+private:
+  std::vector<Line> lines;
 };
 
 #endif
