@@ -13,7 +13,6 @@ class Triangle {
 public:
   /**
    * Constructs a Triangle with the given Points.
-   *
    * @param a a Point
    * @param b a Point
    * @param c a Point
@@ -23,7 +22,6 @@ public:
 
   /**
    * Returns a copy of this Triangle.
-   *
    * @param rhs this Triangle
    * @return the copied Triangle
    */
@@ -31,21 +29,18 @@ public:
 
   /**
    * Returns Point A of this Triangle.
-   *
    * @return the Point for a
    */
   Point getA() const;
 
   /**
    * Returns Point B of this Triangle.
-   *
    * @return the Point for b
    */
   Point getB() const;
 
   /**
    * Returns Point C of this Triangle.
-   *
    * @return the Point for c
    */
   Point getC() const;

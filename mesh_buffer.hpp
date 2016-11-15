@@ -15,7 +15,6 @@ class MeshBuffer : public std::vector<Point> {
 public:
   /**
    * Constructs a MeshBuffer with a single Line.
-   *
    * @param p1 a point
    * @param p2 a point
    * @return the constructed Buffer
@@ -24,7 +23,6 @@ public:
 
   /**
    * Returns a copy of this MeshBuffer.
-   *
    * @return the copied MeshBuffer
    */
   MeshBuffer(const MeshBuffer& rhs);
@@ -32,7 +30,6 @@ public:
   /**
    * Adds a edge to the buffer by linking an existing
    * Point to a new Point.
-   *
    * @param i an index for an existing point
    * @param p a Point to be added
    */
@@ -42,11 +39,17 @@ public:
    * Modifies the position of a Point by an index by
    * replacing its coordinates with those of another
    * Point.
-   *
    * @param i an index for an existing point
    * @param p a Point with the new coordinates
    */
   void modifyPoint(int i, Point p);
+
+  /**
+   * Returns a vector containing triplets of vertices for independent
+   * triangles, to be used with GL_TRIANGLES.
+   * @return the vector of Points
+   */
+  std::vector<Point> getVerticesForGlTriangles();
 
 private:
   std::vector<Line> lines;

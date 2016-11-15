@@ -15,7 +15,6 @@
 
 /**
  * Passed to glutKeyboardFunc() as the keyboard callback.
- *
  * @param key the input received via keystroke
  * @param x the x-coordinate of the mouse location
  * @param y the y-coordinate of the mouse location
@@ -38,7 +37,6 @@ void printUsage() {
 
 /**
  * Called at program startup.
- *
  * @param argc the number of arguments
  * @param argv the array of arguments
  */

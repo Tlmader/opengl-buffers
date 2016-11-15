@@ -13,7 +13,6 @@ class Line {
 public:
   /**
    * Constructs a Line with the given Points.
-   *
    * @param a a Point
    * @param b a Point
    * @return the constructed Line
@@ -22,7 +21,6 @@ public:
 
   /**
    * Returns a copy of this Line.
-   *
    * @param rhs this Line
    * @return the copied Line
    */
@@ -30,14 +28,12 @@ public:
 
   /**
    * Returns Point A of this Line.
-   *
    * @return the Point for a
    */
   Point getA() const;
 
   /**
    * Returns Point B of this Line.
-   *
    * @return the Point for b
    */
   Point getB() const;

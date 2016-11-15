@@ -1,6 +1,5 @@
 #
 # Makefile for csci4631-hw5
-#
 # Author: Ted Mader
 # Date: 2016-11-14
 #
