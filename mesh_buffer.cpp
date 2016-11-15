@@ -21,9 +21,7 @@ void MeshBuffer::addVertex(int i, vec2 v) {
 }
 
 void MeshBuffer::modifyVertex(int i, vec2 v) {
-  vector::at(i).setX(v.getX());
-  vector::at(i).setX(v.getY());
-  vector::at(i).setZ(v.getZ());
+  vector::at(i).operator=(v);
 }
 
 std::vector<vec2> MeshBuffer::getVerticesForGlLines() {

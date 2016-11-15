@@ -22,9 +22,7 @@ void TriangleBuffer::addVertex(int i, int j, vec2 v) {
 }
 
 void TriangleBuffer::modifyVertex(int i, vec2 v) {
-  vector::at(i).setX(v.getX());
-  vector::at(i).setX(v.getY());
-  vector::at(i).setZ(v.getZ());
+  vector::at(i).operator=(v);
 }
 
 std::vector<vec2> TriangleBuffer::getVerticesForGlTriangles() {
