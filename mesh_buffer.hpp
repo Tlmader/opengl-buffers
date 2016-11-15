@@ -46,9 +46,9 @@ public:
   /**
    * Returns a vector containing pairs of vertices for independent line
    * segments, to be used with GL_LINES.
-   * @return the vector of Vertices
+   * @return the array of vec3
    */
-  std::vector<vec3> getVerticesForGlLines();
+  GLfloat* getVerticesForGlLines();
 
 private:
   std::vector<Line> lines;

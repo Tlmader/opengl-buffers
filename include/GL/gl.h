@@ -24,7 +24,7 @@
 
 
 /************************************************************************
- * 2002-Apr-22, Josï¿½ Fonseca:
+ * 2002-Apr-22, José Fonseca:
  *   Removed non Win32 system-specific stuff
  *
  * 2002-Apr-17, Marcus Geelnard:
@@ -162,7 +162,7 @@ typedef double          GLclampd;       /* double precision float in [0,1] */
 #define GL_QUAD_STRIP                           0x0008
 #define GL_POLYGON                              0x0009
 
-/* vec3 Arrays */
+/* Vertex Arrays */
 #define GL_VERTEX_ARRAY                         0x8074
 #define GL_NORMAL_ARRAY                         0x8075
 #define GL_COLOR_ARRAY                          0x8076

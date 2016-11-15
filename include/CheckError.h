@@ -4,6 +4,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+#pragma GCC diagnostic ignored "-Wunused-function"
+
 #ifndef __CHECKERROR_H__
 #define __CHECKERROR_H__
 

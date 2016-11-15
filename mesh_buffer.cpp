@@ -26,11 +26,12 @@ void MeshBuffer::modifyVertex(int i, vec3 v) {
   vector::at(i).operator=(v);
 }
 
-std::vector<vec3> MeshBuffer::getVerticesForGlLines() {
-  std::vector<vec3> vertices;
+GLfloat* MeshBuffer::getVerticesForGlLines() {
+  GLfloat *vertices[lines.size()];
+  int i = 0;
   for (const Line& l : lines) {
-    vertices.push_back(l.getA());
-    vertices.push_back(l.getB());
+    vertices[i++] = l.getA();
+    vertices[i++] = l.getB();
   }
-  return vertices;
+  return *vertices;
 }
