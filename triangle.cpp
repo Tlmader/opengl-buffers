@@ -20,11 +20,13 @@ Triangle::Triangle(const Triangle &rhs) {
 }
 
 void Triangle::calcNormals() {
-  vec4 edge1 = b - a;
-  vec4 edge2 = c - b;
-  normals = {((edge1[1] * edge2[2]) - (edge1[2] * edge2[1])),
-             ((edge1[2] * edge2[0]) - (edge1[0] * edge2[2])),
-             ((edge1[0] * edge2[1]) - (edge1[1] * edge2[0]))};
+  vec4 e1 = b - a;
+  vec4 e2 = c - b;
+  n = {((e1[1] * e2[2]) - (e1[2] * e2[1])),
+             ((e1[2] * e2[0]) - (e1[0] * e2[2])),
+             ((e1[0] * e2[1]) - (e1[1] * e2[0]))};
+  float len = sqrt((n[0] * n[0]) + (n[1] * n[1]) + (n[2] * n[2]));
+  n /= len;
 }
 
 vec4 Triangle::getA() const {
@@ -40,5 +42,5 @@ vec4 Triangle::getC() const {
 }
 
 vec4 Triangle::getNormals() const {
-  return normals;
+  return n;
 }

@@ -60,7 +60,7 @@ private:
   vec4 a;
   vec4 b;
   vec4 c;
-  vec4 normals;
+  vec4 n;
 };
 
 #endif
