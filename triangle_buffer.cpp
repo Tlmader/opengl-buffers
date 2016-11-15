@@ -33,12 +33,21 @@ void TriangleBuffer::modifyVertex(int i, vec4 v) {
 }
 
 GLfloat* TriangleBuffer::getVerticesForGlTriangles() {
-  GLfloat *vertices[triangles.size()];
+  GLfloat *vertices[triangles.size() * 3];
   int i = 0;
   for (const Triangle& t : triangles) {
     vertices[i++] = t.getA();
     vertices[i++] = t.getB();
     vertices[i++] = t.getC();
+  }
+  return *vertices;
+}
+
+GLfloat* TriangleBuffer::getNormalsForGlTriangles() {
+  GLfloat *vertices[triangles.size()];
+  int i = 0;
+  for (const Triangle& t : triangles) {
+    vertices[i++] = t.getNormals();
   }
   return *vertices;
 }

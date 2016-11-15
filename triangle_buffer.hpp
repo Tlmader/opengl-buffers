@@ -51,6 +51,13 @@ public:
    */
   GLfloat* getVerticesForGlTriangles();
 
+  /**
+   * Returns a vector containing normals for independent triangles, to be used
+   * with GL_TRIANGLES.
+   * @return the vector of Vertices
+   */
+  GLfloat* getNormalsForGlTriangles();
+
 private:
   std::vector<Triangle> triangles;
 };
