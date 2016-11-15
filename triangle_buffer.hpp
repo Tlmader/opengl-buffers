@@ -4,6 +4,7 @@
 #include <vector>
 #include "vertex.hpp"
 #include "triangle.hpp"
+#include "include/Angel.h"
 
 /**
  * Contains function declarations for a TriangleBuffer.
