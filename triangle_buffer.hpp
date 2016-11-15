@@ -14,7 +14,7 @@ class TriangleBuffer : public std::vector<Point> {
 
 public:
   /**
-   * Constructs a TriangleBuffer.
+   * Constructs a TriangleBuffer with a single Triangle.
    *
    * @param p1 a point
    * @param p2 a point

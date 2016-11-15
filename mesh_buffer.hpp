@@ -14,14 +14,13 @@ class MeshBuffer : public std::vector<Point> {
 
 public:
   /**
-   * Constructs a MeshBuffer.
+   * Constructs a MeshBuffer with a single Line.
    *
    * @param p1 a point
    * @param p2 a point
-   * @param p3 a point
    * @return the constructed Buffer
    */
-  MeshBuffer(Point p1, Point p2, Point p3);
+  MeshBuffer(Point p1, Point p2);
 
   /**
    * Returns a copy of this MeshBuffer.
