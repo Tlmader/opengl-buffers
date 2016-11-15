@@ -29,7 +29,7 @@ public:
   TriangleBuffer(const TriangleBuffer& rhs);
 
   /**
-   * Adds a edge to the buffer by linking existing Vertexs to a new Vertex.
+   * Adds a edge to the buffer by linking existing Vertices to a new Vertex.
    * @param i an index for an existing vertex
    * @param j an index for an existing vertex
    * @param v a Vertex to be added
