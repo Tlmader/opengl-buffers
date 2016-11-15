@@ -21,9 +21,10 @@ public:
    *
    * @param x a value for x
    * @param y a value for y
+   * @param z a value for z
    * @return the constructed Point
    */
-  Point(float x, float y);
+  Point(float x, float y, float z);
 
   /**
    * Returns a copy of this Point.
@@ -59,9 +60,24 @@ public:
    */
   void setY(float _y);
 
+  /**
+   * Returns the z value of this Point.
+   *
+   * @return the value for z
+   */
+  double getZ() const;
+
+  /**
+   * Sets the z value of this Point.
+   *
+   * @param _z the new value for z
+   */
+  void setZ(float _z);
+
 private:
   float x;
   float y;
+  float z;
 };
 
 #endif
