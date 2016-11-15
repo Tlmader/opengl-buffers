@@ -13,12 +13,12 @@ class Triangle {
 public:
   /**
    * Constructs a Triangle with the given vertex.
-   * @param a a vec3
-   * @param b a vec3
-   * @param c a vec3
+   * @param a a vec4
+   * @param b a vec4
+   * @param c a vec4
    * @return the constructed Triangle
    */
-  Triangle(vec3 a, vec3 b, vec3 c);
+  Triangle(vec4 a, vec4 b, vec4 c);
 
   /**
    * Returns a copy of this Triangle.
@@ -29,26 +29,26 @@ public:
 
   /**
    * Returns vertex A of this Triangle.
-   * @return the vec3 for a
+   * @return the vec4 for a
    */
-  vec3 getA() const;
+  vec4 getA() const;
 
   /**
    * Returns vertex B of this Triangle.
-   * @return the vec3 for b
+   * @return the vec4 for b
    */
-  vec3 getB() const;
+  vec4 getB() const;
 
   /**
    * Returns vertex C of this Triangle.
-   * @return the vec3 for c
+   * @return the vec4 for c
    */
-  vec3 getC() const;
+  vec4 getC() const;
 
 private:
-  vec3 a;
-  vec3 b;
-  vec3 c;
+  vec4 a;
+  vec4 b;
+  vec4 c;
 };
 
 #endif

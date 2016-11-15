@@ -8,7 +8,7 @@
  * @date 2016-11-14
  */
 
-MeshBuffer::MeshBuffer(vec3 a, vec3 b) {
+MeshBuffer::MeshBuffer(vec4 a, vec4 b) {
   vector::push_back(a);
   vector::push_back(b);
   lines.push_back(*new Line(a, b));
@@ -18,11 +18,11 @@ MeshBuffer::MeshBuffer(const MeshBuffer &rhs) {
   lines = rhs.lines;
 }
 
-void MeshBuffer::addVertex(int i, vec3 v) {
+void MeshBuffer::addVertex(int i, vec4 v) {
   lines.push_back(*new Line(vector::at(i), v));
 }
 
-void MeshBuffer::modifyVertex(int i, vec3 v) {
+void MeshBuffer::modifyVertex(int i, vec4 v) {
   vector::at(i).operator=(v);
 }
 

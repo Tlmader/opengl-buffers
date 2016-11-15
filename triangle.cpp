@@ -6,7 +6,7 @@
  * @date 2016-11-14
  */
 
-Triangle::Triangle(vec3 _a, vec3 _b, vec3 _c) {
+Triangle::Triangle(vec4 _a, vec4 _b, vec4 _c) {
   a = _a;
   b = _b;
   c = _c;
@@ -18,14 +18,14 @@ Triangle::Triangle(const Triangle &rhs) {
   c = rhs.c;
 }
 
-vec3 Triangle::getA() const {
+vec4 Triangle::getA() const {
   return a;
 }
 
-vec3 Triangle::getB() const {
+vec4 Triangle::getB() const {
   return b;
 }
 
-vec3 Triangle::getC() const {
+vec4 Triangle::getC() const {
   return c;
 }

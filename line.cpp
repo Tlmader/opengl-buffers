@@ -6,7 +6,7 @@
  * @date 2016-11-14
  */
 
-Line::Line(vec3 _a, vec3 _b) {
+Line::Line(vec4 _a, vec4 _b) {
   a = _a;
   b = _b;
 }
@@ -16,10 +16,10 @@ Line::Line(const Line &rhs) {
   b = rhs.b;
 }
 
-vec3 Line::getA() const {
+vec4 Line::getA() const {
   return a;
 }
 
-vec3 Line::getB() const {
+vec4 Line::getB() const {
   return b;
 }
