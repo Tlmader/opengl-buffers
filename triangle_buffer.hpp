@@ -47,9 +47,9 @@ public:
   /**
    * Returns a vector containing triplets of vertices for independent
    * triangles, to be used with GL_TRIANGLES.
-   * @return the vector of Vertexs
+   * @return the vector of Vertices
    */
-  std::vector<Vertex> getVerticesForGlLines();
+  std::vector<Vertex> getVerticesForGlTriangles();
 
 private:
   std::vector<Triangle> triangles;

@@ -26,3 +26,13 @@ void TriangleBuffer::modifyVertex(int i, Vertex v) {
   vector::at(i).setX(v.getY());
   vector::at(i).setZ(v.getZ());
 }
+
+std::vector<Vertex> TriangleBuffer::getVerticesForGlTriangles() {
+  std::vector<Vertex> vertices;
+  for (const Triangle& t : triangles) {
+    vertices.push_back(t.getA());
+    vertices.push_back(t.getB());
+    vertices.push_back(t.getC());
+  }
+  return vertices;
+}

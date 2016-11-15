@@ -12,7 +12,7 @@ class Line {
 
 public:
   /**
-   * Constructs a Line with the given Vertexs.
+   * Constructs a Line with the given Vertices.
    * @param a a Vertex
    * @param b a Vertex
    * @return the constructed Line

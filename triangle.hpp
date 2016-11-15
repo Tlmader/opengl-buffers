@@ -12,7 +12,7 @@ class Triangle {
 
 public:
   /**
-   * Constructs a Triangle with the given Vertexs.
+   * Constructs a Triangle with the given Vertices.
    * @param a a Vertex
    * @param b a Vertex
    * @param c a Vertex
