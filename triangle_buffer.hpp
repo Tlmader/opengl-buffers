@@ -45,8 +45,8 @@ public:
   void modifyVertex(int i, Vertex v);
 
   /**
-   * Returns a vector containing pairs of vertices for independent line
-   * segments, to be used with GL_LINES.
+   * Returns a vector containing triplets of vertices for independent
+   * triangles, to be used with GL_TRIANGLES.
    * @return the vector of Vertexs
    */
   std::vector<Vertex> getVerticesForGlLines();

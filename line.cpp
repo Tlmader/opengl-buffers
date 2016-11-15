@@ -3,7 +3,7 @@
 /**
  * Implements functions for a Line.
  * @author Ted Mader
- * @date 2016-09-12
+ * @date 2016-11-14
  */
 
 Line::Line(Vertex _a, Vertex _b) {

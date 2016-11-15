@@ -3,7 +3,7 @@
 /**
  * Implements functions for a TriangleBuffer.
  * @author Ted Mader
- * @date 2016-09-12
+ * @date 2016-11-14
  */
 
 TriangleBuffer::TriangleBuffer(Vertex a, Vertex b, Vertex c) {

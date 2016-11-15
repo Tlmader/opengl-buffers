@@ -3,7 +3,7 @@
 /**
  * Implements functions for a Vertex.
  * @author Ted Mader
- * @date 2016-09-12
+ * @date 2016-11-14
  */
 
 Vertex::Vertex() {

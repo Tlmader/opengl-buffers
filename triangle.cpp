@@ -3,7 +3,7 @@
 /**
  * Implements functions for a Triangle.
  * @author Ted Mader
- * @date 2016-09-12
+ * @date 2016-11-14
  */
 
 Triangle::Triangle(Vertex _a, Vertex _b, Vertex _c) {
