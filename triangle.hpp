@@ -45,10 +45,22 @@ public:
    */
   vec4 getC() const;
 
+  /**
+   * Returns the normals of this Triangle.
+   * @return the vec4 for the normals
+   */
+  vec4 getNormals() const;
+
+  /**
+   * Caclulates the normals of this Triangle.
+   */
+  void calcNormals();
+
 private:
   vec4 a;
   vec4 b;
   vec4 c;
+  vec4 normals;
 };
 
 #endif
