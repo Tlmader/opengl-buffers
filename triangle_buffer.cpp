@@ -19,6 +19,10 @@ TriangleBuffer::TriangleBuffer(const TriangleBuffer &rhs) {
   triangles = rhs.triangles;
 }
 
+void TriangleBuffer::addVerticesForTriangle(vec4 a, vec4 b, vec4 c) {
+
+}
+
 void TriangleBuffer::addVertexAndLinkExisting(int i, int j, vec4 v) {
   triangles.push_back(*new Triangle(vector::at(i), vector::at(j), v));
 }

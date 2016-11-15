@@ -18,7 +18,41 @@ MeshBuffer::MeshBuffer(const MeshBuffer &rhs) {
   lines = rhs.lines;
 }
 
+void MeshBuffer::addVerticesForLine(vec4 a, vec4 b) {
+  if (a == b) {
+    return;
+  }
+  bool aExists = false;
+  bool bExists = false;
+  for (Line& l : lines) {
+    if (l.getA() == a) {
+      a = l.getA();
+      aExists = true;
+    } else if (l.getB() == a) {
+      a = l.getB();
+      aExists = true;
+    }
+    if (l.getA() == b) {
+      b = l.getA();
+      bExists = true;
+    } else if (l.getB() == b) {
+      b = l.getB();
+      bExists = true;
+    }
+  }
+  if (!aExists) {
+    vector::push_back(a);
+  }
+  if (!bExists) {
+  vector::push_back(b);
+  }
+  lines.push_back(*new Line(a, b));
+}
+
 void MeshBuffer::addVertexAndLinkExisting(int i, vec4 v) {
+  if (vector::at(i) == v) {
+    return;
+  }
   lines.push_back(*new Line(vector::at(i), v));
 }
 
