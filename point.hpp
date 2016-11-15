@@ -63,4 +63,5 @@ private:
   float x;
   float y;
 };
+
 #endif
