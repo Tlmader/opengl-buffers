@@ -33,6 +33,9 @@ void MeshBuffer::addVertexAndLinkExisting(int i, vec4 v) {
 }
 
 void MeshBuffer::modifyVertex(int i, vec4 v) {
+  if (std::find(this->begin(), this->end(), v) != this->end()) {
+    return;
+  }
   vector::at(i).operator=(v);
 }
 
