@@ -25,6 +25,11 @@ void TriangleBuffer::addVertex(int i, int j, vec4 v) {
 
 void TriangleBuffer::modifyVertex(int i, vec4 v) {
   vector::at(i).operator=(v);
+  for (Triangle& t : triangles) {
+    if (*t.getA() == *v || *t.getB() == *v || *t.getC() == *v) {
+      t.calcNormals();
+    }
+  }
 }
 
 GLfloat* TriangleBuffer::getVerticesForGlTriangles() {
