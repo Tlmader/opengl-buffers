@@ -13,11 +13,11 @@ class Line {
 public:
   /**
    * Constructs a Line with the given vertex.
-   * @param a a vec2
-   * @param b a vec2
+   * @param a a vec3
+   * @param b a vec3
    * @return the constructed Line
    */
-  Line(vec2 a, vec2 b);
+  Line(vec3 a, vec3 b);
 
   /**
    * Returns a copy of this Line.
@@ -27,20 +27,20 @@ public:
   Line(const Line& rhs);
 
   /**
-   * Returns vec2 A of this Line.
-   * @return the vec2 for a
+   * Returns vec3 A of this Line.
+   * @return the vec3 for a
    */
-  vec2 getA() const;
+  vec3 getA() const;
 
   /**
-   * Returns vec2 B of this Line.
-   * @return the vec2 for b
+   * Returns vec3 B of this Line.
+   * @return the vec3 for b
    */
-  vec2 getB() const;
+  vec3 getB() const;
 
 private:
-  vec2 a;
-  vec2 b;
+  vec3 a;
+  vec3 b;
 };
 
 #endif

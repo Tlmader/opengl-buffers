@@ -13,10 +13,10 @@ namespace Angel {
 
 //////////////////////////////////////////////////////////////////////////////
 //
-//  vec2.h - 2D vector
+//  vec3.h - 2D vector
 //
 
-struct vec2 {
+struct vec3 {
 
     GLfloat  x;
     GLfloat  y;
@@ -25,13 +25,13 @@ struct vec2 {
     //  --- Constructors and Destructors ---
     //
 
-    vec2( GLfloat s = GLfloat(0.0) ) :
+    vec3( GLfloat s = GLfloat(0.0) ) :
 	x(s), y(s) {}
 
-    vec2( GLfloat x, GLfloat y ) :
+    vec3( GLfloat x, GLfloat y ) :
 	x(x), y(y) {}
 
-    vec2( const vec2& v )
+    vec3( const vec3& v )
 	{ x = v.x;  y = v.y;  }
 
     //
@@ -45,30 +45,30 @@ struct vec2 {
     //  --- (non-modifying) Arithematic Operators ---
     //
 
-    vec2 operator - () const // unary minus operator
-	{ return vec2( -x, -y ); }
+    vec3 operator - () const // unary minus operator
+	{ return vec3( -x, -y ); }
 
-    vec2 operator + ( const vec2& v ) const
-	{ return vec2( x + v.x, y + v.y ); }
+    vec3 operator + ( const vec3& v ) const
+	{ return vec3( x + v.x, y + v.y ); }
 
-    vec2 operator - ( const vec2& v ) const
-	{ return vec2( x - v.x, y - v.y ); }
+    vec3 operator - ( const vec3& v ) const
+	{ return vec3( x - v.x, y - v.y ); }
 
-    vec2 operator * ( const GLfloat s ) const
-	{ return vec2( s*x, s*y ); }
+    vec3 operator * ( const GLfloat s ) const
+	{ return vec3( s*x, s*y ); }
 
-    vec2 operator * ( const vec2& v ) const
-	{ return vec2( x*v.x, y*v.y ); }
+    vec3 operator * ( const vec3& v ) const
+	{ return vec3( x*v.x, y*v.y ); }
 
-    friend vec2 operator * ( const GLfloat s, const vec2& v )
+    friend vec3 operator * ( const GLfloat s, const vec3& v )
 	{ return v * s; }
 
-    vec2 operator / ( const GLfloat s ) const {
+    vec3 operator / ( const GLfloat s ) const {
 #ifdef DEBUG
 	if ( std::fabs(s) < DivideByZeroTolerance ) {
 	    std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
 		      << "Division by zero" << std::endl;
-	    return vec2();
+	    return vec3();
 	}
 #endif // DEBUG
 
@@ -80,19 +80,19 @@ struct vec2 {
     //  --- (modifying) Arithematic Operators ---
     //
 
-    vec2& operator += ( const vec2& v )
+    vec3& operator += ( const vec3& v )
 	{ x += v.x;  y += v.y;   return *this; }
 
-    vec2& operator -= ( const vec2& v )
+    vec3& operator -= ( const vec3& v )
 	{ x -= v.x;  y -= v.y;  return *this; }
 
-    vec2& operator *= ( const GLfloat s )
+    vec3& operator *= ( const GLfloat s )
 	{ x *= s;  y *= s;   return *this; }
 
-    vec2& operator *= ( const vec2& v )
+    vec3& operator *= ( const vec3& v )
 	{ x *= v.x;  y *= v.y; return *this; }
 
-    vec2& operator /= ( const GLfloat s ) {
+    vec3& operator /= ( const GLfloat s ) {
 #ifdef DEBUG
 	if ( std::fabs(s) < DivideByZeroTolerance ) {
 	    std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
@@ -110,11 +110,11 @@ struct vec2 {
     //  --- Insertion and Extraction Operators ---
     //
 
-    friend std::ostream& operator << ( std::ostream& os, const vec2& v ) {
+    friend std::ostream& operator << ( std::ostream& os, const vec3& v ) {
 	return os << "( " << v.x << ", " << v.y <<  " )";
     }
 
-    friend std::istream& operator >> ( std::istream& is, vec2& v )
+    friend std::istream& operator >> ( std::istream& is, vec3& v )
 	{ return is >> v.x >> v.y ; }
 
     //
@@ -130,21 +130,21 @@ struct vec2 {
 
 //----------------------------------------------------------------------------
 //
-//  Non-class vec2 Methods
+//  Non-class vec3 Methods
 //
 
 inline
-GLfloat dot( const vec2& u, const vec2& v ) {
+GLfloat dot( const vec3& u, const vec3& v ) {
     return u.x * v.x + u.y * v.y;
 }
 
 inline
-GLfloat length( const vec2& v ) {
+GLfloat length( const vec3& v ) {
     return std::sqrt( dot(v,v) );
 }
 
 inline
-vec2 normalize( const vec2& v ) {
+vec3 normalize( const vec3& v ) {
     return v / length(v);
 }
 
@@ -172,7 +172,7 @@ struct vec3 {
 
     vec3( const vec3& v ) { x = v.x;  y = v.y;  z = v.z; }
 
-    vec3( const vec2& v, const float f ) { x = v.x;  y = v.y;  z = f; }
+    vec3( const vec3& v, const float f ) { x = v.x;  y = v.y;  z = f; }
 
     //
     //  --- Indexing Operator ---
@@ -325,7 +325,7 @@ struct vec4 {
     vec4( const vec3& v, const float w = 1.0 ) : w(w)
 	{ x = v.x;  y = v.y;  z = v.z; }
 
-    vec4( const vec2& v, const float z, const float w ) : z(z), w(w)
+    vec4( const vec3& v, const float z, const float w ) : z(z), w(w)
 	{ x = v.x;  y = v.y; }
 
     //

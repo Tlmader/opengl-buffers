@@ -19,7 +19,7 @@ namespace Angel {
 
 class mat2 {
 
-    vec2  _m[2];
+    vec3  _m[2];
 
    public:
     //
@@ -29,11 +29,11 @@ class mat2 {
     mat2( const GLfloat d = GLfloat(1.0) )  // Create a diagional matrix
 	{ _m[0].x = d;  _m[1].y = d;   }
 
-    mat2( const vec2& a, const vec2& b )
+    mat2( const vec3& a, const vec3& b )
 	{ _m[0] = a;  _m[1] = b;  }
 
     mat2( GLfloat m00, GLfloat m10, GLfloat m01, GLfloat m11 )
-	{ _m[0] = vec2( m00, m01 ); _m[1] = vec2( m10, m11 ); }
+	{ _m[0] = vec3( m00, m01 ); _m[1] = vec3( m10, m11 ); }
 
     mat2( const mat2& m ) {
 	if ( *this != m ) {
@@ -46,8 +46,8 @@ class mat2 {
     //  --- Indexing Operator ---
     //
 
-    vec2& operator [] ( int i ) { return _m[i]; }
-    const vec2& operator [] ( int i ) const { return _m[i]; }
+    vec3& operator [] ( int i ) { return _m[i]; }
+    const vec3& operator [] ( int i ) const { return _m[i]; }
 
     //
     //  --- (non-modifying) Arithmatic Operators ---
@@ -142,8 +142,8 @@ class mat2 {
     //  --- Matrix / Vector operators ---
     //
 
-    vec2 operator * ( const vec2& v ) const {  // m * v
-	return vec2( _m[0][0]*v.x + _m[0][1]*v.y,
+    vec3 operator * ( const vec3& v ) const {  // m * v
+	return vec3( _m[0][0]*v.x + _m[0][1]*v.y,
 		     _m[1][0]*v.x + _m[1][1]*v.y );
     }
 	
