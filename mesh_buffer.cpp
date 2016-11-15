@@ -22,38 +22,14 @@ void MeshBuffer::addVerticesForLine(vec4 a, vec4 b) {
   if (a == b) {
     return;
   }
-  bool aExists = false;
-  bool bExists = false;
-  for (Line& l : lines) {
-    if (l.getA() == a) {
-      a = l.getA();
-      aExists = true;
-    } else if (l.getB() == a) {
-      a = l.getB();
-      aExists = true;
-    }
-    if (l.getA() == b) {
-      b = l.getA();
-      bExists = true;
-    } else if (l.getB() == b) {
-      b = l.getB();
-      bExists = true;
-    }
-  }
-  if (!aExists) {
-    vector::push_back(a);
-  }
-  if (!bExists) {
-  vector::push_back(b);
-  }
-  lines.push_back(*new Line(a, b));
+  lines.push_back(*new Line(replaceIfExists(a), replaceIfExists(b)));
 }
 
 void MeshBuffer::addVertexAndLinkExisting(int i, vec4 v) {
   if (vector::at(i) == v) {
     return;
   }
-  lines.push_back(*new Line(vector::at(i), v));
+  lines.push_back(*new Line(vector::at(i), replaceIfExists(v)));
 }
 
 void MeshBuffer::modifyVertex(int i, vec4 v) {
@@ -68,4 +44,12 @@ GLfloat* MeshBuffer::getVerticesForGlLines() {
     vertices[i++] = l.getB();
   }
   return *vertices;
+}
+
+vec4 MeshBuffer::replaceIfExists(vec4 v) {
+  std::vector<vec4>::iterator it = std::find(this->begin(), this->end(), v);
+  if (it != this->end()) {
+    return *it;
+  }
+  return v;
 }

@@ -58,6 +58,11 @@ public:
 
 private:
   std::vector<Line> lines;
+
+  /**
+   * Attempts to replace given vertex with a matching existing vertex.
+   */
+  vec4 replaceIfExists(vec4 v);
 };
 
 #endif

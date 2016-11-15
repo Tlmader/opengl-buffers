@@ -20,11 +20,17 @@ TriangleBuffer::TriangleBuffer(const TriangleBuffer &rhs) {
 }
 
 void TriangleBuffer::addVerticesForTriangle(vec4 a, vec4 b, vec4 c) {
-
+  if (a == b || a == c || b == c) {
+    return;
+  }
+  triangles.push_back(*new Triangle(replaceIfExists(a), replaceIfExists(b), replaceIfExists(c)));
 }
 
 void TriangleBuffer::addVertexAndLinkExisting(int i, int j, vec4 v) {
-  triangles.push_back(*new Triangle(vector::at(i), vector::at(j), v));
+  if (i == j || vector::at(i) == v || vector::at(j) || v) {
+    return;
+  }
+  triangles.push_back(*new Triangle(vector::at(i), vector::at(j), replaceIfExists(v)));
 }
 
 void TriangleBuffer::modifyVertex(int i, vec4 v) {
@@ -54,4 +60,12 @@ GLfloat* TriangleBuffer::getNormalsForGlTriangles() {
     vertices[i++] = t.getNormals();
   }
   return *vertices;
+}
+
+vec4 TriangleBuffer::replaceIfExists(vec4 v) {
+  std::vector<vec4>::iterator it = std::find(this->begin(), this->end(), v);
+  if (it != this->end()) {
+    return *it;
+  }
+  return v;
 }
