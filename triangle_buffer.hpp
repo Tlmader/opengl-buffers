@@ -2,7 +2,7 @@
 #define TRIANGLE_BUFFER_H
 
 #include <vector>
-#include "point.hpp"
+#include "vertex.hpp"
 #include "triangle.hpp"
 
 /**
@@ -10,17 +10,17 @@
  * @author Ted Mader
  * @date 2016-11-14
  */
-class TriangleBuffer : public std::vector<Point> {
+class TriangleBuffer : public std::vector<Vertex> {
 
 public:
   /**
    * Constructs a TriangleBuffer with a single Triangle.
-   * @param p1 a point
-   * @param p2 a point
-   * @param p3 a point
+   * @param v1 a vertex
+   * @param v2 a vertex
+   * @param p3 a vertex
    * @return the constructed Buffer
    */
-  TriangleBuffer(Point p1, Point p2, Point p3);
+  TriangleBuffer(Vertex v1, Vertex v2, Vertex p3);
 
   /**
    * Returns a copy of this TriangleBuffer.
@@ -29,27 +29,27 @@ public:
   TriangleBuffer(const TriangleBuffer& rhs);
 
   /**
-   * Adds a edge to the buffer by linking existing Points to a new Point.
-   * @param i an index for an existing point
-   * @param j an index for an existing point
-   * @param p a Point to be added
+   * Adds a edge to the buffer by linking existing Vertexs to a new Vertex.
+   * @param i an index for an existing vertex
+   * @param j an index for an existing vertex
+   * @param v a Vertex to be added
    */
-  void addPoint(int i, int j, Point p);
+  void addVertex(int i, int j, Vertex v);
 
   /**
-   * Modifies the position of a Point by an index by replacing its coordinates
-   * with those of another Point.
-   * @param i an index for an existing point
-   * @param p a Point with the new coordinates
+   * Modifies the position of a Vertex by an index by replacing its coordinates
+   * with those of another Vertex.
+   * @param i an index for an existing vertex
+   * @param v a Vertex with the new coordinates
    */
-  void modifyPoint(int i, Point p);
+  void modifyVertex(int i, Vertex v);
 
   /**
    * Returns a vector containing pairs of vertices for independent line
    * segments, to be used with GL_LINES.
-   * @return the vector of Points
+   * @return the vector of Vertexs
    */
-  std::vector<Point> getVerticesForGlLines();
+  std::vector<Vertex> getVerticesForGlLines();
 
 private:
   std::vector<Triangle> triangles;

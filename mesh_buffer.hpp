@@ -2,7 +2,7 @@
 #define MESH_BUFFER_H
 
 #include <vector>
-#include "point.hpp"
+#include "vertex.hpp"
 #include "line.hpp"
 
 /**
@@ -10,16 +10,16 @@
  * @author Ted Mader
  * @date 2016-11-14
  */
-class MeshBuffer : public std::vector<Point> {
+class MeshBuffer : public std::vector<Vertex> {
 
 public:
   /**
    * Constructs a MeshBuffer with a single Line.
-   * @param p1 a point
-   * @param p2 a point
+   * @param v1 a vertex
+   * @param v2 a vertex
    * @return the constructed Buffer
    */
-  MeshBuffer(Point p1, Point p2);
+  MeshBuffer(Vertex v1, Vertex v2);
 
   /**
    * Returns a copy of this MeshBuffer.
@@ -29,27 +29,27 @@ public:
 
   /**
    * Adds a edge to the buffer by linking an existing
-   * Point to a new Point.
-   * @param i an index for an existing point
-   * @param p a Point to be added
+   * Vertex to a new Vertex.
+   * @param i an index for an existing vertex
+   * @param v a Vertex to be added
    */
-  void addPoint(int i, Point p);
+  void addVertex(int i, Vertex v);
 
   /**
-   * Modifies the position of a Point by an index by
+   * Modifies the position of a Vertex by an index by
    * replacing its coordinates with those of another
-   * Point.
-   * @param i an index for an existing point
-   * @param p a Point with the new coordinates
+   * Vertex.
+   * @param i an index for an existing vertex
+   * @param v a Vertex with the new coordinates
    */
-  void modifyPoint(int i, Point p);
+  void modifyVertex(int i, Vertex v);
 
   /**
    * Returns a vector containing triplets of vertices for independent
    * triangles, to be used with GL_TRIANGLES.
-   * @return the vector of Points
+   * @return the vector of Vertexs
    */
-  std::vector<Point> getVerticesForGlTriangles();
+  std::vector<Vertex> getVerticesForGlTriangles();
 
 private:
   std::vector<Line> lines;

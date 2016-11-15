@@ -6,7 +6,7 @@
  * @date 2016-09-12
  */
 
-TriangleBuffer::TriangleBuffer(Point a, Point b, Point c) {
+TriangleBuffer::TriangleBuffer(Vertex a, Vertex b, Vertex c) {
   vector::push_back(a);
   vector::push_back(b);
   vector::push_back(c);
@@ -17,12 +17,12 @@ TriangleBuffer::TriangleBuffer(const TriangleBuffer &rhs) {
   triangles = rhs.triangles;
 }
 
-void TriangleBuffer::addPoint(int i, int j, Point p) {
-  triangles.push_back(*new Triangle(vector::at(i), vector::at(j), p));
+void TriangleBuffer::addVertex(int i, int j, Vertex v) {
+  triangles.push_back(*new Triangle(vector::at(i), vector::at(j), v));
 }
 
-void TriangleBuffer::modifyPoint(int i, Point p) {
-  vector::at(i).setX(p.getX());
-  vector::at(i).setX(p.getY());
-  vector::at(i).setZ(p.getZ());
+void TriangleBuffer::modifyVertex(int i, Vertex v) {
+  vector::at(i).setX(v.getX());
+  vector::at(i).setX(v.getY());
+  vector::at(i).setZ(v.getZ());
 }

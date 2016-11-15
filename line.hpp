@@ -1,7 +1,7 @@
 #ifndef LINE_H
 #define LINE_H
 
-#include "point.hpp"
+#include "vertex.hpp"
 
 /**
  * Contains function declarations a Line.
@@ -12,12 +12,12 @@ class Line {
 
 public:
   /**
-   * Constructs a Line with the given Points.
-   * @param a a Point
-   * @param b a Point
+   * Constructs a Line with the given Vertexs.
+   * @param a a Vertex
+   * @param b a Vertex
    * @return the constructed Line
    */
-  Line(Point a, Point b);
+  Line(Vertex a, Vertex b);
 
   /**
    * Returns a copy of this Line.
@@ -27,20 +27,20 @@ public:
   Line(const Line& rhs);
 
   /**
-   * Returns Point A of this Line.
-   * @return the Point for a
+   * Returns Vertex A of this Line.
+   * @return the Vertex for a
    */
-  Point getA() const;
+  Vertex getA() const;
 
   /**
-   * Returns Point B of this Line.
-   * @return the Point for b
+   * Returns Vertex B of this Line.
+   * @return the Vertex for b
    */
-  Point getB() const;
+  Vertex getB() const;
 
 private:
-  Point a;
-  Point b;
+  Vertex a;
+  Vertex b;
 };
 
 #endif

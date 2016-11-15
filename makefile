@@ -9,11 +9,11 @@ TARGETS = render.exe
 
 all: $(TARGETS)
 
-render.exe: point.o line.o triangle.o mesh_buffer.o triangle_buffer.o main.o
-	$(CC) -o render.exe point.o triangle.o mesh_buffer.o triangle_buffer.o main.o -lstdc++ -framework OpenGL -framework GLUT
+render.exe: vertex.o line.o triangle.o mesh_buffer.o triangle_buffer.o main.o
+	$(CC) -o render.exe vertex.o line.o triangle.o mesh_buffer.o triangle_buffer.o main.o -lstdc++ -framework OpenGL -framework GLUT
 
-point.o: point.cpp
-	$(CC) -c point.cpp
+vertex.o: vertex.cpp
+	$(CC) -c vertex.cpp
 
 line.o: line.cpp
 	$(CC) -c line.cpp

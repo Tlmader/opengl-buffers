@@ -1,7 +1,7 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include "point.hpp"
+#include "vertex.hpp"
 
 /**
  * Contains function declarations for a Triangle.
@@ -12,13 +12,13 @@ class Triangle {
 
 public:
   /**
-   * Constructs a Triangle with the given Points.
-   * @param a a Point
-   * @param b a Point
-   * @param c a Point
+   * Constructs a Triangle with the given Vertexs.
+   * @param a a Vertex
+   * @param b a Vertex
+   * @param c a Vertex
    * @return the constructed Triangle
    */
-  Triangle(Point a, Point b, Point c);
+  Triangle(Vertex a, Vertex b, Vertex c);
 
   /**
    * Returns a copy of this Triangle.
@@ -28,27 +28,27 @@ public:
   Triangle(const Triangle& rhs);
 
   /**
-   * Returns Point A of this Triangle.
-   * @return the Point for a
+   * Returns Vertex A of this Triangle.
+   * @return the Vertex for a
    */
-  Point getA() const;
+  Vertex getA() const;
 
   /**
-   * Returns Point B of this Triangle.
-   * @return the Point for b
+   * Returns Vertex B of this Triangle.
+   * @return the Vertex for b
    */
-  Point getB() const;
+  Vertex getB() const;
 
   /**
-   * Returns Point C of this Triangle.
-   * @return the Point for c
+   * Returns Vertex C of this Triangle.
+   * @return the Vertex for c
    */
-  Point getC() const;
+  Vertex getC() const;
 
 private:
-  Point a;
-  Point b;
-  Point c;
+  Vertex a;
+  Vertex b;
+  Vertex c;
 };
 
 #endif

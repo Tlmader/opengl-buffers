@@ -6,7 +6,7 @@
  * @date 2016-09-12
  */
 
-MeshBuffer::MeshBuffer(Point a, Point b) {
+MeshBuffer::MeshBuffer(Vertex a, Vertex b) {
   vector::push_back(a);
   vector::push_back(b);
   lines.push_back(*new Line(a, b));
@@ -16,12 +16,12 @@ MeshBuffer::MeshBuffer(const MeshBuffer &rhs) {
   lines = rhs.lines;
 }
 
-void MeshBuffer::addPoint(int i, Point p) {
-  lines.push_back(*new Line(vector::at(i), p));
+void MeshBuffer::addVertex(int i, Vertex v) {
+  lines.push_back(*new Line(vector::at(i), v));
 }
 
-void MeshBuffer::modifyPoint(int i, Point p) {
-  vector::at(i).setX(p.getX());
-  vector::at(i).setX(p.getY());
-  vector::at(i).setZ(p.getZ());
+void MeshBuffer::modifyVertex(int i, Vertex v) {
+  vector::at(i).setX(v.getX());
+  vector::at(i).setX(v.getY());
+  vector::at(i).setZ(v.getZ());
 }
