@@ -73,6 +73,8 @@ private:
    * Attempts to replace given vertex with a matching existing vertex.
    */
   vec4 replaceIfExists(vec4 v);
+
+  bool compareVectors(vec4 a, vec4 b);
 };
 
 #endif

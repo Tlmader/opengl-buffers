@@ -20,14 +20,17 @@ TriangleBuffer::TriangleBuffer(const TriangleBuffer &rhs) {
 }
 
 void TriangleBuffer::addVerticesForTriangle(vec4 a, vec4 b, vec4 c) {
-  if (a == b || a == c || b == c) {
+  if (compareVectors(a, b) ||
+      compareVectors(a, c) ||
+      compareVectors(b, c)) {
     return;
   }
   triangles.push_back(*new Triangle(replaceIfExists(a), replaceIfExists(b), replaceIfExists(c)));
 }
 
 void TriangleBuffer::addVertexAndLinkExisting(int i, int j, vec4 v) {
-  if (i == j || vector::at(i) == v || vector::at(j) || v) {
+  if (compareVectors(vector::at(i), v) ||
+      compareVectors(vector::at(j), v)) {
     return;
   }
   triangles.push_back(*new Triangle(vector::at(i), vector::at(j), replaceIfExists(v)));
@@ -39,7 +42,9 @@ void TriangleBuffer::modifyVertex(int i, vec4 v) {
   }
   vector::at(i).operator=(v);
   for (Triangle& t : triangles) {
-    if (*t.getA() == *v || *t.getB() == *v || *t.getC() == *v) {
+    if (compareVectors(t.getA(), v) ||
+        compareVectors(t.getB(), v) ||
+        compareVectors(t.getC(), v)) {
       t.calcNormals();
     }
   }
@@ -71,4 +76,11 @@ vec4 TriangleBuffer::replaceIfExists(vec4 v) {
     return *it;
   }
   return v;
+}
+
+bool TriangleBuffer::compareVectors(vec4 a, vec4 b) {
+  if (a[0] == b[0] || a[1] == b[1] || a[2] == b[2] || a[3] == b[3]) {
+    return true;
+  }
+  return false;
 }
