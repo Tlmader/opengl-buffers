@@ -110,7 +110,7 @@ bool TriangleBuffer::triangleContains(Triangle t, vec4 v) {
   if (vectorsEqual(t.getA(), v) ||
       vectorsEqual(t.getB(), v) ||
       vectorsEqual(t.getC(), v)) {
-        return true;
-      }
+    return true;
+  }
   return false;
 }
