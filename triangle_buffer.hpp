@@ -66,6 +66,12 @@ public:
    */
   GLfloat* getNormalsForGlTriangles();
 
+  /**
+   * Returns a vector containing Gouraud Normals for independent triangles, to * be used with GL_TRIANGLES.
+   * @return the vector of Vertices
+   */
+  GLfloat* getGNormalsForGlTriangles();
+
 private:
   std::vector<Triangle> triangles;
 
@@ -75,6 +81,8 @@ private:
   vec4 replaceIfExists(vec4 v);
 
   bool compareVectors(vec4 a, vec4 b);
+
+  bool triangleContains(Triangle t, vec4 v);
 };
 
 #endif

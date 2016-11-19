@@ -105,7 +105,7 @@ struct vec2 {
 
 	return *this;
     }
-	
+
     //
     //  --- Insertion and Extraction Operators ---
     //
@@ -245,7 +245,7 @@ struct vec3 {
 
 	return *this;
     }
-	
+
     //
     //  --- Insertion and Extraction Operators ---
     //
@@ -399,7 +399,7 @@ struct vec4 {
 
 	return *this;
     }
-	
+
     //
     //  --- Insertion and Extraction Operators ---
     //

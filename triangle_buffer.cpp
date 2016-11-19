@@ -62,16 +62,36 @@ GLfloat* TriangleBuffer::getVerticesForGlTriangles() {
 }
 
 GLfloat* TriangleBuffer::getNormalsForGlTriangles() {
-  GLfloat *vertices[triangles.size()];
+  GLfloat *normals[triangles.size()];
   int i = 0;
   for (const Triangle& t : triangles) {
-    vertices[i++] = t.getNormals();
+    normals[i++] = t.getNormals();
   }
-  return *vertices;
+  return *normals;
+}
+
+GLfloat* TriangleBuffer::getGNormalsForGlTriangles() {
+  GLfloat *normals[this->size()];
+  int i = 0;
+  for (const vec4& v: *this) {
+    vec4 nSum;
+    int nCount = 0;
+    for (const Triangle& t : triangles) {
+      if (triangleContains(t, v)) {
+        nSum += t.getNormals();
+        nCount++;
+      }
+    }
+    normals[i++] = nSum / nCount;
+  }
+  return *normals;
 }
 
 vec4 TriangleBuffer::replaceIfExists(vec4 v) {
-  std::vector<vec4>::iterator it = std::find(this->begin(), this->end(), v);
+  std::vector<vec4>::iterator it = std::find_if(this->begin(), this->end(),
+    [v, this](vec4 const i) {
+      return compareVectors(v, i);
+    });
   if (it != this->end()) {
     return *it;
   }
@@ -79,8 +99,20 @@ vec4 TriangleBuffer::replaceIfExists(vec4 v) {
 }
 
 bool TriangleBuffer::compareVectors(vec4 a, vec4 b) {
-  if (a[0] == b[0] || a[1] == b[1] || a[2] == b[2] || a[3] == b[3]) {
+  if (a[0] == b[0] ||
+      a[1] == b[1] ||
+      a[2] == b[2] ||
+      a[3] == b[3]) {
     return true;
   }
+  return false;
+}
+
+bool TriangleBuffer::triangleContains(Triangle t, vec4 v) {
+  if (compareVectors(t.getA(), v) ||
+      compareVectors(t.getB(), v) ||
+      compareVectors(t.getC(), v)) {
+        return true;
+      }
   return false;
 }
