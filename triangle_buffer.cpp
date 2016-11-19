@@ -20,17 +20,17 @@ TriangleBuffer::TriangleBuffer(const TriangleBuffer &rhs) {
 }
 
 void TriangleBuffer::addVerticesForTriangle(vec4 a, vec4 b, vec4 c) {
-  if (compareVectors(a, b) ||
-      compareVectors(a, c) ||
-      compareVectors(b, c)) {
+  if (vectorsEqual(a, b) ||
+      vectorsEqual(a, c) ||
+      vectorsEqual(b, c)) {
     return;
   }
   triangles.push_back(*new Triangle(replaceIfExists(a), replaceIfExists(b), replaceIfExists(c)));
 }
 
 void TriangleBuffer::addVertexAndLinkExisting(int i, int j, vec4 v) {
-  if (compareVectors(vector::at(i), v) ||
-      compareVectors(vector::at(j), v)) {
+  if (vectorsEqual(vector::at(i), v) ||
+      vectorsEqual(vector::at(j), v)) {
     return;
   }
   triangles.push_back(*new Triangle(vector::at(i), vector::at(j), replaceIfExists(v)));
@@ -42,9 +42,7 @@ void TriangleBuffer::modifyVertex(int i, vec4 v) {
   }
   vector::at(i).operator=(v);
   for (Triangle& t : triangles) {
-    if (compareVectors(t.getA(), v) ||
-        compareVectors(t.getB(), v) ||
-        compareVectors(t.getC(), v)) {
+    if (triangleContains(t, v)) {
       t.calcNormals();
     }
   }
@@ -90,7 +88,7 @@ GLfloat* TriangleBuffer::getGNormalsForGlTriangles() {
 vec4 TriangleBuffer::replaceIfExists(vec4 v) {
   std::vector<vec4>::iterator it = std::find_if(this->begin(), this->end(),
     [v, this](vec4 const i) {
-      return compareVectors(v, i);
+      return vectorsEqual(v, i);
     });
   if (it != this->end()) {
     return *it;
@@ -98,7 +96,7 @@ vec4 TriangleBuffer::replaceIfExists(vec4 v) {
   return v;
 }
 
-bool TriangleBuffer::compareVectors(vec4 a, vec4 b) {
+bool TriangleBuffer::vectorsEqual(vec4 a, vec4 b) {
   if (a[0] == b[0] ||
       a[1] == b[1] ||
       a[2] == b[2] ||
@@ -109,9 +107,9 @@ bool TriangleBuffer::compareVectors(vec4 a, vec4 b) {
 }
 
 bool TriangleBuffer::triangleContains(Triangle t, vec4 v) {
-  if (compareVectors(t.getA(), v) ||
-      compareVectors(t.getB(), v) ||
-      compareVectors(t.getC(), v)) {
+  if (vectorsEqual(t.getA(), v) ||
+      vectorsEqual(t.getB(), v) ||
+      vectorsEqual(t.getC(), v)) {
         return true;
       }
   return false;

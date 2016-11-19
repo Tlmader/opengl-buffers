@@ -19,14 +19,14 @@ MeshBuffer::MeshBuffer(const MeshBuffer &rhs) {
 }
 
 void MeshBuffer::addVerticesForLine(vec4 a, vec4 b) {
-  if (compareVectors(a, b)) {
+  if (vectorsEqual(a, b)) {
     return;
   }
   lines.push_back(*new Line(replaceIfExists(a), replaceIfExists(b)));
 }
 
 void MeshBuffer::addVertexAndLinkExisting(int i, vec4 v) {
-  if (compareVectors(vector::at(i), v)) {
+  if (vectorsEqual(vector::at(i), v)) {
     return;
   }
   lines.push_back(*new Line(vector::at(i), replaceIfExists(v)));
@@ -52,7 +52,7 @@ GLfloat* MeshBuffer::getVerticesForGlLines() {
 vec4 MeshBuffer::replaceIfExists(vec4 v) {
   std::vector<vec4>::iterator it = std::find_if(this->begin(), this->end(),
     [v, this](vec4 const i) {
-      return compareVectors(v, i);
+      return vectorsEqual(v, i);
     });
   if (it != this->end()) {
     return *it;
@@ -60,7 +60,7 @@ vec4 MeshBuffer::replaceIfExists(vec4 v) {
   return v;
 }
 
-bool MeshBuffer::compareVectors(vec4 a, vec4 b) {
+bool MeshBuffer::vectorsEqual(vec4 a, vec4 b) {
   if (a[0] == b[0] ||
       a[1] == b[1] ||
       a[2] == b[2] ||

@@ -80,7 +80,7 @@ private:
    */
   vec4 replaceIfExists(vec4 v);
 
-  bool compareVectors(vec4 a, vec4 b);
+  bool vectorsEqual(vec4 a, vec4 b);
 
   bool triangleContains(Triangle t, vec4 v);
 };
