@@ -20,7 +20,7 @@ public:
    * @param p3 a vec4
    * @return the constructed Buffer
    */
-  TriangleBuffer(vec4 a, vec4 b, vec4 c);
+  TriangleBuffer(vec4 *a, vec4 *b, vec4 *c);
 
   /**
    * Returns a copy of this TriangleBuffer.
@@ -34,7 +34,7 @@ public:
    * @param b a vec4 to be added
    * @param c a vec4 to be added
    */
-  void addVerticesForTriangle(vec4 a, vec4 b, vec4 c);
+  void addVerticesForTriangle(vec4 *a, vec4 *b, vec4 *c);
 
   /**
    * Adds a new Triangle by linking existing vertices to a new vertex.
