@@ -11,7 +11,7 @@ TARGETS = render.exe
 all: $(TARGETS)
 
 render.exe: line.o triangle.o mesh_buffer.o triangle_buffer.o main.o
-	$(CC) $(CFLAGS) -o render.exe line.o triangle.o mesh_buffer.o triangle_buffer.o main.o  -framework OpenGL -framework GLUT
+	$(CC) $(CFLAGS) -o render.exe line.o triangle.o mesh_buffer.o triangle_buffer.o main.o -framework OpenGL -framework GLUT
 
 line.o: line.cpp
 	$(CC) $(CFLAGS) -c line.cpp

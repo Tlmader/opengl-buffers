@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <vector>
 #include "mesh_buffer.hpp"
+#include "triangle_buffer.hpp"
 
 /**
  * Passed to glutKeyboardFunc() as the keyboard callback.
@@ -36,8 +37,48 @@ void printUsage() {
   std::cout << "usage: ./render.exe [-m | --mesh] -t | --triangle]\n" << std::endl;
 }
 
-void test() {
+void testMeshBuffer() {
+  GLfloat i = 0;
+  vec4 v1 = {i++, i++, i++, 1};
+  vec4 v2 = {i++, i++, i++, 1};
+  vec4 v3 = {i++, i++, i++, 1};
+  vec4 v4 = {i++, i++, i++, 1};
+  vec4 v5 = {i++, i++, i++, 1};
+  vec4 v6 = {i++, i++, i++, 1};
+  vec4 v7 = {i++, i++, i++, 1};
+  vec4 v8 = {i++, i++, i++, 1};
+  vec4 v9 = {i++, i++, i++, 1};
 
+  MeshBuffer *mb = new MeshBuffer(v1, v2);
+  mb->addVerticesForLine(v3, v4);
+  mb->addVerticesForLine(v5, v6);
+  mb->addVerticesForLine(v7, v8);
+  mb->addVerticesForLine(v9, v1);
+
+
+}
+
+void testTriangleBuffer() {
+  GLfloat i = 0;
+  vec4 v1 = {i++, i++, i++, 1};
+  vec4 v2 = {i++, i++, i++, 1};
+  vec4 v3 = {i++, i++, i++, 1};
+  vec4 v4 = {i++, i++, i++, 1};
+  vec4 v5 = {i++, i++, i++, 1};
+  vec4 v6 = {i++, i++, i++, 1};
+  vec4 v7 = {i++, i++, i++, 1};
+  vec4 v8 = {i++, i++, i++, 1};
+  vec4 v9 = {i++, i++, i++, 1};
+
+  TriangleBuffer *tb = new TriangleBuffer(v1, v2, v3);
+  tb->addVerticesForTriangle(v4, v5, v6);
+  tb->addVerticesForTriangle(v7, v8, v9);
+  tb->addVerticesForTriangle(v1, v4, v7);
+
+  const GLfloat norms = tb->getNormalsForGlTriangles();
+  for (int i; i < 4(); i++) {
+    std::cout << norms[i][0] + norms[i][1] + norms[i][2] + norms[i][3] << std::endl;
+  }
 }
 
 /**

@@ -51,20 +51,20 @@ public:
    * triangles, to be used with GL_TRIANGLES.
    * @return the vector of vec4
    */
-  const GLfloat *getVerticesForGlTriangles();
+  std::vector<vec4> getVerticesForGlTriangles();
 
   /**
    * Returns a vector containing normals for independent triangles, to be used
    * with GL_TRIANGLES.
    * @return the vector of Vertices
    */
-  const GLfloat *getNormalsForGlTriangles();
+  std::vector<vec4> getNormalsForGlTriangles();
 
   /**
    * Returns a vector containing Gouraud Normals for independent triangles, to * be used with GL_TRIANGLES.
    * @return the vector of Vertices
    */
-  const GLfloat *getGNormalsForGlTriangles();
+  std::vector<vec4> getGNormalsForGlTriangles();
 
 private:
   std::vector<Triangle> triangles;

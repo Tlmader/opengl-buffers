@@ -48,7 +48,7 @@ public:
    * segments, to be used with GL_LINES.
    * @return the array of vec4
    */
-  const GLfloat* getVerticesForGlLines();
+  std::vector<vec4> getVerticesForGlLines();
 
 private:
   std::vector<Line> lines;

@@ -35,14 +35,13 @@ void MeshBuffer::modifyVertex(int i, vec4 &v) {
   vector::at(i).operator=(v);
 }
 
-const GLfloat* MeshBuffer::getVerticesForGlLines() {
-  const GLfloat *vertices[lines.size()];
-  int i = 0;
+std::vector<vec4> MeshBuffer::getVerticesForGlLines() {
+  std::vector<vec4> vertices;
   for (const Line& l : lines) {
-    vertices[i++] = l.getA();
-    vertices[i++] = l.getB();
+    vertices.push_back(l.getA());
+    vertices.push_back(l.getB());
   }
-  return *vertices;
+  return vertices;
 }
 
 vec4 &MeshBuffer::replaceIfExists(vec4 &v) {

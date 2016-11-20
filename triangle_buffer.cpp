@@ -44,29 +44,26 @@ void TriangleBuffer::modifyVertex(int i, vec4 &v) {
   }
 }
 
-const GLfloat* TriangleBuffer::getVerticesForGlTriangles() {
-  const GLfloat *vertices[triangles.size() * 3];
-  int i = 0;
+std::vector<vec4> TriangleBuffer::getVerticesForGlTriangles() {
+  std::vector<vec4> vertices;
   for (const Triangle& t : triangles) {
-    vertices[i++] = t.getA();
-    vertices[i++] = t.getB();
-    vertices[i++] = t.getC();
+    vertices.push_back(t.getA());
+    vertices.push_back(t.getB());
+    vertices.push_back(t.getC());
   }
-  return *vertices;
+  return vertices;
 }
 
-const GLfloat* TriangleBuffer::getNormalsForGlTriangles() {
-  const GLfloat *normals[triangles.size()];
-  int i = 0;
+std::vector<vec4> TriangleBuffer::getNormalsForGlTriangles() {
+  std::vector<vec4> normals;
   for (const Triangle& t : triangles) {
-    normals[i++] = t.getNormals();
+    normals.push_back(t.getNormals());
   }
-  return *normals;
+  return normals;
 }
 
-const GLfloat *TriangleBuffer::getGNormalsForGlTriangles() {
-  const GLfloat *normals[this->size()];
-  int i = 0;
+std::vector<vec4> TriangleBuffer::getGNormalsForGlTriangles() {
+  std::vector<vec4> normals;
   for (const vec4& v: *this) {
     vec4 nSum;
     int nCount = 0;
@@ -76,9 +73,9 @@ const GLfloat *TriangleBuffer::getGNormalsForGlTriangles() {
         nCount++;
       }
     }
-    normals[i++] = nSum / nCount;
+    normals.push_back(nSum / nCount);
   }
-  return *normals;
+  return normals;
 }
 
 vec4 &TriangleBuffer::replaceIfExists(vec4 &v) {
