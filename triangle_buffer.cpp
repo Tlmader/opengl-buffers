@@ -45,11 +45,6 @@ void TriangleBuffer::modifyVertex(int i, vec4 &v) {
     return;
   }
   vector::at(i).operator=(v);
-  for (Triangle& t : triangles) {
-    if (triangleContains(t, v)) {
-      t.calcNormal();
-    }
-  }
 }
 
 std::vector<vec4> TriangleBuffer::getVerticesForGlTriangles() {
