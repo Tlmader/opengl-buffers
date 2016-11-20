@@ -42,16 +42,15 @@ void printVector(vec4 v) {
 }
 
 void testMeshBuffer() {
-  GLfloat i = 0;
-  vec4 v1 = {i++, i++, i++, 1};
-  vec4 v2 = {i++, i++, i++, 1};
-  vec4 v3 = {i++, i++, i++, 1};
-  vec4 v4 = {i++, i++, i++, 1};
-  vec4 v5 = {i++, i++, i++, 1};
-  vec4 v6 = {i++, i++, i++, 1};
-  vec4 v7 = {i++, i++, i++, 1};
-  vec4 v8 = {i++, i++, i++, 1};
-  vec4 v9 = {i++, i++, i++, 1};
+  vec4 v1 = {-0.498530, 0.712498, -0.039883, 1};
+  vec4 v2 = {-0.501666, 0.699221, -0.063813, 1};
+  vec4 v3 = {-0.501255, 0.717792, 0.000000, 1};
+  vec4 v4 = {-0.624036, 0.711938, -0.039883, 1};
+  vec4 v5 = {-0.526706, 0.651362, -0.039883, 1};
+  vec4 v6 = {-0.508714, 0.682112, -0.071712, 1};
+  vec4 v7 = {-0.622039, 0.698704, -0.063813, 1};
+  vec4 v8 = {-0.624834, 0.717232, 0.000000, 1};
+  vec4 v9 = {-0.498530, 0.712498, 0.039883, 1};
 
   MeshBuffer *mb = new MeshBuffer(v1, v2);
   mb->addVerticesForLine(v3, v4);
@@ -67,16 +66,15 @@ void testMeshBuffer() {
 }
 
 void testTriangleBuffer() {
-  GLfloat i = 0;
-  vec4 v1 = {i++, i++, i++, 1};
-  vec4 v2 = {i++, i++, i++, 1};
-  vec4 v3 = {i++, i++, i++, 1};
-  vec4 v4 = {i++, i++, i++, 1};
-  vec4 v5 = {i++, i++, i++, 1};
-  vec4 v6 = {i++, i++, i++, 1};
-  vec4 v7 = {i++, i++, i++, 1};
-  vec4 v8 = {i++, i++, i++, 1};
-  vec4 v9 = {i++, i++, i++, 1};
+  vec4 v1 = {-0.638129, 0.287158, 0.000000, 1};
+  vec4 v2 = {-0.517593, 0.664661, -0.063813, 1};
+  vec4 v3 = {-0.534329, 0.646030, 0.000000, 1};
+  vec4 v4 = {-0.614850, 0.651067, -0.039883, 1};
+  vec4 v5 = {-0.616848, 0.664299, -0.063813, 1};
+  vec4 v6 = {-0.619445, 0.681503, -0.071790, 1};
+  vec4 v7 = {-0.741245, 0.707456, -0.039883, 1};
+  vec4 v8 = {-0.744483, 0.712577, 0.000000, 1};
+  vec4 v9 = {-0.624036, 0.711938, 0.039883, 1};
 
   TriangleBuffer *tb = new TriangleBuffer(v1, v2, v3);
   tb->addVerticesForTriangle(v4, v5, v6);
@@ -106,7 +104,7 @@ void testTriangleBuffer() {
  * @param argv the array of arguments
  */
 int main(int argc, char *argv[]) {
-  testMeshBuffer();
+  // testMeshBuffer();
   testTriangleBuffer();
   // if (argc < 2) {
   //   printUsage();

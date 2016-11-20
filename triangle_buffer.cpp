@@ -47,7 +47,7 @@ void TriangleBuffer::modifyVertex(int i, vec4 &v) {
   vector::at(i).operator=(v);
   for (Triangle& t : triangles) {
     if (triangleContains(t, v)) {
-      t.calcNormals();
+      t.calcNormal();
     }
   }
 }
@@ -65,7 +65,7 @@ std::vector<vec4> TriangleBuffer::getVerticesForGlTriangles() {
 std::vector<vec4> TriangleBuffer::getNormalsForGlTriangles() {
   std::vector<vec4> normals;
   for (const Triangle& t : triangles) {
-    normals.push_back(t.getNormals());
+    normals.push_back(t.getNormal());
   }
   return normals;
 }
@@ -77,7 +77,7 @@ std::vector<vec4> TriangleBuffer::getGNormalsForGlTriangles() {
     int nCount = 0;
     for (const Triangle& t : triangles) {
       if (triangleContains(t, v)) {
-        nSum += t.getNormals();
+        nSum += t.getNormal();
         nCount++;
       }
     }

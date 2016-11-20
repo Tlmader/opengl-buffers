@@ -49,12 +49,12 @@ public:
    * Returns the normals of this Triangle.
    * @return the vec4 for the normals
    */
-  const vec4 &getNormals() const;
+  const vec4 &getNormal() const;
 
   /**
    * Caclulates the normals of this Triangle.
    */
-  void calcNormals();
+  void calcNormal();
 
 private:
   vec4 &a;
