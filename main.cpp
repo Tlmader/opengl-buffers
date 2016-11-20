@@ -37,7 +37,7 @@ void printUsage() {
 }
 
 void test() {
-  new MeshBuffer(new vec4(1, 0, 0, 0), new vec4(2, 0, 0, 0));
+
 }
 
 /**

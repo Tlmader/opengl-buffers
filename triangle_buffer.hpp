@@ -20,13 +20,7 @@ public:
    * @param p3 a vec4
    * @return the constructed Buffer
    */
-  TriangleBuffer(vec4 *a, vec4 *b, vec4 *c);
-
-  /**
-   * Returns a copy of this TriangleBuffer.
-   * @return the copied TriangleBuffer
-   */
-  TriangleBuffer(const TriangleBuffer& rhs);
+  TriangleBuffer(vec4 &a, vec4 &b, vec4 &c);
 
   /**
    * Adds a triplet of vertices for a new Triangle.
@@ -34,7 +28,7 @@ public:
    * @param b a vec4 to be added
    * @param c a vec4 to be added
    */
-  void addVerticesForTriangle(vec4 *a, vec4 *b, vec4 *c);
+  void addVerticesForTriangle(vec4 &a, vec4 &b, vec4 &c);
 
   /**
    * Adds a new Triangle by linking existing vertices to a new vertex.
@@ -42,7 +36,7 @@ public:
    * @param j an index for an existing vec4
    * @param v a vec4 to be added
    */
-  void addVertexAndLinkExisting(int i, int j, vec4 v);
+  void addVertexAndLinkExisting(int i, int j, vec4 &v);
 
   /**
    * Modifies the position of a vertex by an index by replacing its coordinates
@@ -50,27 +44,27 @@ public:
    * @param i an index for an existing vec4
    * @param v a vec4 with the new coordinates
    */
-  void modifyVertex(int i, vec4 v);
+  void modifyVertex(int i, vec4 &v);
 
   /**
    * Returns a vector containing triplets of vertices for independent
    * triangles, to be used with GL_TRIANGLES.
    * @return the vector of vec4
    */
-  GLfloat* getVerticesForGlTriangles();
+  const GLfloat *getVerticesForGlTriangles();
 
   /**
    * Returns a vector containing normals for independent triangles, to be used
    * with GL_TRIANGLES.
    * @return the vector of Vertices
    */
-  GLfloat* getNormalsForGlTriangles();
+  const GLfloat *getNormalsForGlTriangles();
 
   /**
    * Returns a vector containing Gouraud Normals for independent triangles, to * be used with GL_TRIANGLES.
    * @return the vector of Vertices
    */
-  GLfloat* getGNormalsForGlTriangles();
+  const GLfloat *getGNormalsForGlTriangles();
 
 private:
   std::vector<Triangle> triangles;
@@ -78,11 +72,11 @@ private:
   /**
    * Attempts to replace given vertex with a matching existing vertex.
    */
-  vec4 replaceIfExists(vec4 v);
+  vec4 &replaceIfExists(vec4 &v);
 
-  bool vectorsEqual(vec4 a, vec4 b);
+  bool vectorsEqual(const vec4 &a, const vec4 &b);
 
-  bool triangleContains(Triangle t, vec4 v);
+  bool triangleContains(const Triangle &t, const vec4 &v);
 };
 
 #endif
