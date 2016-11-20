@@ -17,30 +17,30 @@ public:
    * @param b a vec4
    * @return the constructed Line
    */
-  Line(vec4 a, vec4 b);
+  Line(vec4 &a, vec4 &b);
 
   /**
    * Returns a copy of this Line.
    * @param rhs this Line
    * @return the copied Line
    */
-  Line(const Line& rhs);
+  Line(const Line &rhs);
 
   /**
    * Returns vec4 A of this Line.
    * @return the vec4 for a
    */
-  vec4 getA() const;
+  const vec4 &getA() const;
 
   /**
    * Returns vec4 B of this Line.
    * @return the vec4 for b
    */
-  vec4 getB() const;
+  const vec4 &getB() const;
 
 private:
-  vec4 a;
-  vec4 b;
+  vec4 &a;
+  vec4 &b;
 };
 
 #endif

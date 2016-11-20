@@ -6,20 +6,14 @@
  * @date 2016-11-14
  */
 
-Line::Line(vec4 _a, vec4 _b) {
-  a = _a;
-  b = _b;
-}
+Line::Line(vec4 &a, vec4 &b) : a(a), b(b) {}
 
-Line::Line(const Line &rhs) {
-  a = rhs.a;
-  b = rhs.b;
-}
+Line::Line(const Line &rhs) : a(rhs.a), b(rhs.b) {}
 
-vec4 Line::getA() const {
+const vec4 &Line::getA() const {
   return a;
 }
 
-vec4 Line::getB() const {
+const vec4 &Line::getB() const {
   return b;
 }

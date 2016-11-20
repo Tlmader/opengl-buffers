@@ -10,9 +10,7 @@ Triangle::Triangle(vec4 &a, vec4 &b, vec4 &c) : a(a), b(b), c(c){
   calcNormals();
 }
 
-Triangle::Triangle(const Triangle &rhs) : a(rhs.a), b(rhs.b), c(rhs.c) {
-
-}
+Triangle::Triangle(const Triangle &rhs) : a(rhs.a), b(rhs.b), c(rhs.c) {}
 
 void Triangle::calcNormals() {
   vec4 e1 = b - a;
