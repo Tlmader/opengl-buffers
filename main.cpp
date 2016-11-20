@@ -104,7 +104,7 @@ void testTriangleBuffer() {
  * @param argv the array of arguments
  */
 int main(int argc, char *argv[]) {
-  // testMeshBuffer();
+  testMeshBuffer();
   testTriangleBuffer();
   // if (argc < 2) {
   //   printUsage();
