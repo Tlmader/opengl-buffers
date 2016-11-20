@@ -37,6 +37,10 @@ void printUsage() {
   std::cout << "usage: ./render.exe [-m | --mesh] -t | --triangle]\n" << std::endl;
 }
 
+void printVector(vec4 v) {
+  printf("%f, %f, %f, %f\n", v[0], v[1], v[2], v[3]);
+}
+
 void testMeshBuffer() {
   GLfloat i = 0;
   vec4 v1 = {i++, i++, i++, 1};
@@ -55,7 +59,11 @@ void testMeshBuffer() {
   mb->addVerticesForLine(v7, v8);
   mb->addVerticesForLine(v9, v1);
 
-
+  std::vector<vec4> vertices = mb->getVerticesForGlLines();
+  printf("getVerticesForGlLines:\n");
+  for (const vec4& v: vertices) {
+    printVector(v);
+  }
 }
 
 void testTriangleBuffer() {
@@ -75,9 +83,20 @@ void testTriangleBuffer() {
   tb->addVerticesForTriangle(v7, v8, v9);
   tb->addVerticesForTriangle(v1, v4, v7);
 
-  const GLfloat norms = tb->getNormalsForGlTriangles();
-  for (int i; i < 4(); i++) {
-    std::cout << norms[i][0] + norms[i][1] + norms[i][2] + norms[i][3] << std::endl;
+  std::vector<vec4> vertices = tb->getVerticesForGlTriangles();
+  printf("getVerticesForGlTriangles:\n");
+  for (const vec4& v: vertices) {
+    printVector(v);
+  }
+  std::vector<vec4> normals = tb->getNormalsForGlTriangles();
+  printf("getNormalsForGlTriangles:\n");
+  for (const vec4& v: normals) {
+    printVector(v);
+  }
+  std::vector<vec4> gouraud = tb->getGNormalsForGlTriangles();
+  printf("getGNormalsForGlTriangles:\n");
+  for (const vec4& v: gouraud) {
+    printVector(v);
   }
 }
 
@@ -87,7 +106,8 @@ void testTriangleBuffer() {
  * @param argv the array of arguments
  */
 int main(int argc, char *argv[]) {
-  test();
+  testMeshBuffer();
+  testTriangleBuffer();
   // if (argc < 2) {
   //   printUsage();
   //   return EXIT_SUCCESS;

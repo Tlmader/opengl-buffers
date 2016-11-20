@@ -90,9 +90,9 @@ vec4 &TriangleBuffer::replaceIfExists(vec4 &v) {
 }
 
 bool TriangleBuffer::vectorsEqual(const vec4 &a, const vec4 &b) {
-  if (a[0] == b[0] ||
-      a[1] == b[1] ||
-      a[2] == b[2] ||
+  if (a[0] == b[0] &&
+      a[1] == b[1] &&
+      a[2] == b[2] &&
       a[3] == b[3]) {
     return true;
   }
