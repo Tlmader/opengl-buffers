@@ -8,7 +8,7 @@
  * @date 2016-11-14
  */
 
-TriangleBuffer::TriangleBuffer(vec4 a, vec4 b, vec4 c) {
+TriangleBuffer::TriangleBuffer(vec4 a, vec4 b, vec4 c) : a(a) : b(b) c(c) {
   vector::push_back(a);
   vector::push_back(b);
   vector::push_back(c);
