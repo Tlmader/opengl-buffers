@@ -18,14 +18,20 @@ void MeshBuffer::addVerticesForLine(vec4 &a, vec4 &b) {
   if (vectorsEqual(a, b)) {
     return;
   }
-  lines.push_back(*new Line(replaceIfExists(a), replaceIfExists(b)));
+  a = replaceIfExists(a);
+  b = replaceIfExists(b);
+  vector::push_back(a);
+  vector::push_back(b);
+  lines.push_back(*new Line(a, b));
 }
 
 void MeshBuffer::addVertexAndLinkExisting(int i, vec4 &v) {
   if (vectorsEqual(vector::at(i), v)) {
     return;
   }
-  lines.push_back(*new Line(vector::at(i), replaceIfExists(v)));
+  v = replaceIfExists(v);
+  vector::push_back(v);
+  lines.push_back(*new Line(vector::at(i), v));
 }
 
 void MeshBuffer::modifyVertex(int i, vec4 &v) {

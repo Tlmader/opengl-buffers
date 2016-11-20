@@ -21,7 +21,13 @@ void TriangleBuffer::addVerticesForTriangle(vec4 &a, vec4 &b, vec4 &c) {
       vectorsEqual(b, c)) {
     return;
   }
-  triangles.push_back(*new Triangle(replaceIfExists(a), replaceIfExists(b), replaceIfExists(c)));
+  a = replaceIfExists(a);
+  b = replaceIfExists(b);
+  c = replaceIfExists(c);
+  vector::push_back(a);
+  vector::push_back(b);
+  vector::push_back(c);
+  triangles.push_back(*new Triangle(a, b, c));
 }
 
 void TriangleBuffer::addVertexAndLinkExisting(int i, int j, vec4 &v) {
@@ -29,7 +35,9 @@ void TriangleBuffer::addVertexAndLinkExisting(int i, int j, vec4 &v) {
       vectorsEqual(vector::at(j), v)) {
     return;
   }
-  triangles.push_back(*new Triangle(vector::at(i), vector::at(j), replaceIfExists(v)));
+  v = replaceIfExists(v);
+  vector::push_back(v);
+  triangles.push_back(*new Triangle(vector::at(i), vector::at(j), v));
 }
 
 void TriangleBuffer::modifyVertex(int i, vec4 &v) {
