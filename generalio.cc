@@ -76,7 +76,7 @@ bool PCGeneralIO::compareToDelimiter ( const string& _s, const string&  _delimit
 {
 	//cout << "comparing " << _s << " and " << _delimiter << endl;
     if ( _s  == _delimiter)
-    {    
+    {
 		//cout << "same!" << endl;
 		return true;
     }
@@ -634,4 +634,3 @@ string PCGeneralIO::stringToLower ( const string& _original )
     }
     return fixed;
 }
-
