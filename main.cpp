@@ -21,6 +21,32 @@
 using namespace std;
 
 /**
+ * Reads a Wavefront object file and returns a vector containing the data.
+ * @return the vector of strings
+ */
+vector<string> readWavefrontFile(const string &path) {
+
+  // open an input file stream
+  ifstream inFile;
+  inFile.open(path.c_str());
+  if (!inFile)
+  {
+      cout << "Error: unable to open file: " << path << endl;
+      exit (1);
+  }
+
+  // read in all the data, and close the file
+  vector<string> fileLines;
+  string tempString;
+  while (getline(inFile,tempString,'\n'))
+  {
+      fileLines.push_back(tempString);
+  }
+  inFile.close();
+  return fileLines;
+}
+
+/**
  * Returns a TriangleBuffer with the provided Wavefront object file data.
  * @param fileLines a vector of strings
  * @return the TriangleBuffer
@@ -47,7 +73,6 @@ TriangleBuffer buildTriangleBuffer(vector<string> fileLines) {
           // normals.push_back(tempnormal);
           //
         } else if (currentLine.substr(0, 2) == "v ") {
-          // split on spaces
           vector<string> vertexAsString = PCGeneralIO::splitString(currentLine, " ");
           float x = PCGeneralIO::stringToReal(vertexAsString[1]);
           float y = PCGeneralIO::stringToReal(vertexAsString[2]);
@@ -55,8 +80,6 @@ TriangleBuffer buildTriangleBuffer(vector<string> fileLines) {
           buffer.push_back(*new vec4(x, y, z, 0));
 
         } else if (currentLine.substr(0, 2) == "f ") {
-          // note: subtracting one to each vertex index to correspond to actual indices in c-style data structure above
-          // split on spaces
           vector<string> faceIndicesAsString = PCGeneralIO::splitString(currentLine," ");
           vector<string> aBits = PCGeneralIO::splitString(faceIndicesAsString[1],"//");
           int a = PCGeneralIO::stringToInt(aBits[0]) - 1;
@@ -76,7 +99,7 @@ TriangleBuffer buildTriangleBuffer(vector<string> fileLines) {
 * Draws triangles based on given vertices.
 * @param vertices a vector of pointers to vertices
 */
-void draw(TriangleBuffer &buffer) {
+void drawTriangles(TriangleBuffer buffer) {
   vector<vec4> vertices = buffer.getVerticesForGlTriangles();
   vector<vec4> normals = buffer.getNormalsForGlTriangles();
   vector<vec4> gouraud = buffer.getGNormalsForGlTriangles();
@@ -87,26 +110,14 @@ void draw(TriangleBuffer &buffer) {
   glEnd();
 }
 
-void printVector(vec4 v) {
-  printf("%f, %f, %f, %f\n", v[0], v[1], v[2], v[3]);
-}
-
-vector<string> readData(const string& path) {
-  ifstream inFile;
-  inFile.open(path.c_str());
-  if (!inFile) {
-    cout << "Error: unable to open file: " << path << endl;
-    exit(1);
-  }
-
-  // read in all the data, and close the file
-  vector<string> fileLines;
-  string tempString;
-  while (getline(inFile, tempString, '\n')) {
-    fileLines.push_back(tempString);
-  }
-  inFile.close();
-  return fileLines;
+/**
+ * Passed to glutDisplayFunc() as the display callback function.
+ */
+void displayWithTriangles()
+{
+  glClear(GL_COLOR_BUFFER_BIT);
+  drawTriangles(buildTriangleBuffer(readWavefrontFile("wt_teapot.obj")));
+  glFlush();
 }
 
 /**
@@ -136,18 +147,16 @@ void printUsage() {
  * @param argv the array of arguments
  */
 int main(int argc, char *argv[]) {
-  // testMeshBuffer();
-  // testTriangleBuffer();
   if (argc < 2) {
     printUsage();
     return EXIT_SUCCESS;
   }
   std::string arg = argv[1];
-  bool useTriangle = false;
+  bool useMesh = true;
   if (arg == "-m" || arg == "--mesh") {
-    useTriangle = false;
+    useMesh = true;
   } else if (arg == "-t" || arg == "--triangle") {
-    useTriangle = true;
+    useMesh = false;
   } else {
     printUsage();
     return EXIT_SUCCESS;
@@ -156,10 +165,10 @@ int main(int argc, char *argv[]) {
   glutInitDisplayMode(GLUT_RGBA);
   glutInitWindowSize(512, 512);
   glutCreateWindow("csci4631-hw5");
-  if (useTriangle) {
+  if (useMesh) {
     glutDisplayFunc(NULL); // TODO: Draw triangle function
   } else {
-    glutDisplayFunc(NULL); // TODO: Draw mesh function
+    glutDisplayFunc(displayWithTriangles); // TODO: Draw mesh function
   }
   glutKeyboardFunc(keyboard);
   glutMainLoop();
