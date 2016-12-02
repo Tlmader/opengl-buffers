@@ -6,6 +6,9 @@
  * @date 2016-11-14
  */
 
+TriangleBuffer::TriangleBuffer() {
+}
+
 TriangleBuffer::TriangleBuffer(vec4 &a, vec4 &b, vec4 &c) {
   vector::push_back(a);
   vector::push_back(b);
