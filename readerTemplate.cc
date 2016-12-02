@@ -1,12 +1,11 @@
 #include <vector>
 #include <iostream>
-#include <stream>
 #include <string>
 #include "generalio.h"
 
 using namespace std;
 
-// read in a Wavefront object file 
+// read in a Wavefront object file
 // data format can be found at  https://en.wikipedia.org/wiki/Wavefront_.obj_file#Face_Elements
 
 void YOURCLASSNAME::readData (const string& _modelfilename )
@@ -59,7 +58,7 @@ void YOURCLASSNAME::readData (const string& _modelfilename )
         if (currentLine.size() > 1) {
             if ( !(currentLine.substr(0,1) == "#") )  // ignore comment lines that start with "#"
             {
-                if (currentLine[i].substr(0,2) == "vn") //  this is a vertex normal
+                if (currentLine.substr(0,2) == "vn") //  this is a vertex normal
                 {
                     // split on spaces
                     vector<string> normalAsString = PCGeneralIO::splitString(currentLine," ");
