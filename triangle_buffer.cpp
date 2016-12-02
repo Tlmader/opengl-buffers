@@ -1,5 +1,3 @@
-#pragma GCC diagnostic ignored "-Wc++11-extensions"
-
 #include "triangle_buffer.hpp"
 
 /**

@@ -2,6 +2,7 @@
 #define TRIANGLE_BUFFER_H
 
 #include <vector>
+#include <algorithm>
 #include "triangle.hpp"
 #include "include/Angel.h"
 

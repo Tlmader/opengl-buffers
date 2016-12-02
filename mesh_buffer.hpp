@@ -2,6 +2,7 @@
 #define MESH_BUFFER_H
 
 #include <vector>
+#include <algorithm>
 #include "line.hpp"
 
 /**

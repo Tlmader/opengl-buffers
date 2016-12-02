@@ -10,7 +10,7 @@
 #define __ANGEL_H__
 
 //----------------------------------------------------------------------------
-// 
+//
 // --- Include system headers ---
 //
 
@@ -35,7 +35,8 @@
 #  include <OpenGL/OpenGL.h>
 #  include <GLUT/glut.h>
 #else // non-Mac OS X operating systems
-#  include <GL/glew.h>
+#  include <GL/gl.h>
+#  include <GL/glut.h>
 #  include <GL/freeglut.h>
 #  include <GL/freeglut_ext.h>
 #endif  // __APPLE__
@@ -52,7 +53,7 @@ namespace Angel {
 
 // Added by Chris Summa as helper to getEnvironmentVariable
 std::string charToString ( char* cPointer );
- 
+
 // Added by Chris Summa for generalization of location of shaders
 std::string getEnvironmentVariable ( const std::string& _evname );
 
@@ -65,7 +66,7 @@ GLuint InitShader( const char* vertexShaderFile,
 //    DEBUG macro is defined.
 const GLfloat  DivideByZeroTolerance = GLfloat(1.0e-07);
 
-//  Degrees-to-radians constant 
+//  Degrees-to-radians constant
 const GLfloat  DegreesToRadians = M_PI / 180.0;
 
 }  // namespace Angel

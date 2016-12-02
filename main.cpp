@@ -7,7 +7,8 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-#include <GLUT/glut.h>
+#include <GL/gl.h>
+#include <GL/glut.h>
 #include <iostream>
 #include <math.h>
 #include <stdlib.h>
