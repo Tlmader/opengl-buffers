@@ -30,4 +30,4 @@ main.o: main.cpp
 	$(CC) -c main.cpp $(CFLAGS)
 
 clean:
-	rm -rf *.o render.exe
+	rm -rf *.o *.exe
