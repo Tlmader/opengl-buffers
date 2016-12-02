@@ -518,86 +518,85 @@ vector<unsigned int> PCGeneralIO::findAllInstancesInString ( const string& _bigS
     return theIndices;
 }
 
-bool PCGeneralIO::matchSubstring ( const string& _bigstring,
-                 const string& _searchstring )
-{
-    unsigned int lengthOfLong = _bigstring.length();
-    unsigned int lengthOfShort = _searchstring.length();
-    if (lengthOfShort > lengthOfLong)
-        return false;
-
-    if (lengthOfShort == lengthOfLong)
-        if (_searchstring == _bigstring)
-            return true;
-
-    for (unsigned int i=0; i< lengthOfLong - lengthOfShort + 1; i++)
-    {
-		//cout << "searching for /'" << _searchstring << "/' in " << _bigstring.substr(i,lengthOfShort) << endl;
-        if (_searchstring == _bigstring.substr(i,lengthOfShort) )
-            return true;
-    }
-    return false;
-}
-
-bool PCGeneralIO::matchRegex ( const string& _bigstring,
-                 const string& _regexstring )
-{
-    // NOTE: this is not working yet - it turned out to be unnecessary for charmm
-
-    //    the CHARMM data file Regular expression wildcards are defined as follows:
-    //    * - any number of characters or no character
-    //    % - any character
-    //        + - any number of characters
-
-    unsigned int lengthOfLong = _bigstring.length();
-    unsigned int lengthOfRegex = _regexstring.length();
-
-    cout << "in matchRegex comparing : " << _bigstring << " to " << _regexstring << endl;
-    string asterisk = "*";
-
-    if (lengthOfRegex > lengthOfLong && !matchSubstring(_bigstring,asterisk))
-        return false;
-    unsigned int c1 = 0;
-    unsigned int c2 = 0;
-    //bool tempreturnval = true;
-    while (c1 < lengthOfLong && c2 < lengthOfRegex)
-    {
-        string b1 = _bigstring.substr(c1,1);
-        string r1 = _regexstring.substr(c2,1);
-        cout << c1 << "\t" << c2 << "\t" << b1 << "\t" << r1 << "\t";
-        if (b1 == r1)
-        {
-            cout << "equal 1" << endl;
-            c1++; c2++;
-        }
-        else if (r1 == "%")
-        {
-            cout << "equal 2" << endl;
-            c1++; c2++;
-        }
-        else if (r1 == "+")
-        {
-            // there must be more characters in bigstring
-            if (c1 < lengthOfLong-1)
-            {
-                cout << "equal 3" << endl;
-                c1++;
-            }
-        }
-        else if (r1 == "*")
-        {
-            cout << "equal 4" << endl;
-            c1++;
-        }
-        else
-        {
-            cout << "false" << endl;
-            return false;
-        }
-    }
-    cout << "true" << endl;
-    return true;
-}
+// bool PCGeneralIO::matchSubstring ( const string& _bigstring, const string& _searchstring)
+// {
+//     unsigned int lengthOfLong = _bigstring.length();
+//     unsigned int lengthOfShort = _searchstring.length();
+//     if (lengthOfShort > lengthOfLong)
+//         return false;
+//
+//     if (lengthOfShort == lengthOfLong)
+//         if (_searchstring == _bigstring)
+//             return true;
+//
+//     for (unsigned int i=0; i< lengthOfLong - lengthOfShort + 1; i++)
+//     {
+// 		//cout << "searching for /'" << _searchstring << "/' in " << _bigstring.substr(i,lengthOfShort) << endl;
+//         if (_searchstring == _bigstring.substr(i,lengthOfShort) )
+//             return true;
+//     }
+//     return false;
+// }
+//
+// bool PCGeneralIO::matchRegex ( const string& _bigstring,
+//                  const string& _regexstring )
+// {
+//     // NOTE: this is not working yet - it turned out to be unnecessary for charmm
+//
+//     //    the CHARMM data file Regular expression wildcards are defined as follows:
+//     //    * - any number of characters or no character
+//     //    % - any character
+//     //        + - any number of characters
+//
+//     unsigned int lengthOfLong = _bigstring.length();
+//     unsigned int lengthOfRegex = _regexstring.length();
+//
+//     cout << "in matchRegex comparing : " << _bigstring << " to " << _regexstring << endl;
+//     string asterisk = "*";
+//
+//     if (lengthOfRegex > lengthOfLong && !matchSubstring(_bigstring,asterisk))
+//         return false;
+//     unsigned int c1 = 0;
+//     unsigned int c2 = 0;
+//     //bool tempreturnval = true;
+//     while (c1 < lengthOfLong && c2 < lengthOfRegex)
+//     {
+//         string b1 = _bigstring.substr(c1,1);
+//         string r1 = _regexstring.substr(c2,1);
+//         cout << c1 << "\t" << c2 << "\t" << b1 << "\t" << r1 << "\t";
+//         if (b1 == r1)
+//         {
+//             cout << "equal 1" << endl;
+//             c1++; c2++;
+//         }
+//         else if (r1 == "%")
+//         {
+//             cout << "equal 2" << endl;
+//             c1++; c2++;
+//         }
+//         else if (r1 == "+")
+//         {
+//             // there must be more characters in bigstring
+//             if (c1 < lengthOfLong-1)
+//             {
+//                 cout << "equal 3" << endl;
+//                 c1++;
+//             }
+//         }
+//         else if (r1 == "*")
+//         {
+//             cout << "equal 4" << endl;
+//             c1++;
+//         }
+//         else
+//         {
+//             cout << "false" << endl;
+//             return false;
+//         }
+//     }
+//     cout << "true" << endl;
+//     return true;
+// }
 
 #define WAIT_MSG "press enter to continue..."
 

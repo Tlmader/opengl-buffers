@@ -11,8 +11,8 @@ TARGETS = render.exe
 
 all: $(TARGETS)
 
-render.exe: line.o triangle.o mesh_buffer.o triangle_buffer.o main.o
-	$(CC) -o render.exe line.o triangle.o mesh_buffer.o triangle_buffer.o main.o $(OFLAGS)
+render.exe: line.o triangle.o mesh_buffer.o triangle_buffer.o exceptions.o generalio.o main.o
+	$(CC) -o render.exe line.o triangle.o mesh_buffer.o triangle_buffer.o exceptions.o generalio.o main.o $(OFLAGS)
 
 line.o: line.cpp
 	$(CC) -c line.cpp $(CFLAGS)
@@ -25,6 +25,12 @@ mesh_buffer.o: mesh_buffer.cpp
 
 triangle_buffer.o: triangle_buffer.cpp
 	$(CC) -c triangle_buffer.cpp $(CFLAGS)
+
+exceptions.o: exceptions.cc
+	$(CC) -c exceptions.cc $(CFLAGS)
+
+generalio.o: generalio.cc
+	$(CC) -c generalio.cc $(CFLAGS)
 
 main.o: main.cpp
 	$(CC) -c main.cpp $(CFLAGS)

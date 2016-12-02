@@ -80,12 +80,12 @@ TriangleBuffer buildTriangleBuffer(vector<string> fileLines) {
           buffer.push_back(*new vec4(x, y, z, 0));
 
         } else if (currentLine.substr(0, 2) == "f ") {
-          vector<string> faceIndicesAsString = PCGeneralIO::splitString(currentLine," ");
-          vector<string> aBits = PCGeneralIO::splitString(faceIndicesAsString[1],"//");
+          vector<string> faceIndicesAsString = PCGeneralIO::splitString(currentLine, " ");
+          vector<string> aBits = PCGeneralIO::splitString(faceIndicesAsString[1], "//");
           int a = PCGeneralIO::stringToInt(aBits[0]) - 1;
-          vector<string> bBits = PCGeneralIO::splitString(faceIndicesAsString[2],"//");
+          vector<string> bBits = PCGeneralIO::splitString(faceIndicesAsString[2], "//");
           int b = PCGeneralIO::stringToInt(bBits[0]) - 1;
-          vector<string> cBits = PCGeneralIO::splitString(faceIndicesAsString[3],"//");
+          vector<string> cBits = PCGeneralIO::splitString(faceIndicesAsString[3], "//");
           int c = PCGeneralIO::stringToInt(cBits[0]) - 1;
           buffer.addVerticesForTriangle(buffer[a], buffer[b], buffer[c]);
         }
