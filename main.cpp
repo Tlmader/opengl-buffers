@@ -51,13 +51,13 @@ vector<string> readWavefrontFile(const string &path) {
  * @param fileLines a vector of strings
  * @return the TriangleBuffer
  */
-TriangleBuffer buildTriangleBuffer(vector<string> fileLines) {
-  TriangleBuffer buffer = *new TriangleBuffer();
-  for (unsigned int i = 0; i < fileLines.size(); i++) {
-    string currentLine = fileLines[i];
-    if (currentLine.size() > 1) {
-      if ( !(currentLine.substr(0, 1) == "#") ) {
-        if (currentLine.substr(0, 2) == "vn") {
+TriangleBuffer *buildTriangleBuffer(vector<string> fileLines) {
+std::cout << "START::buildTriangleBuffer()\n" << std::endl;
+  TriangleBuffer *buffer = new TriangleBuffer();
+  for (const string line : fileLines) {
+    if (line.size() > 1) {
+      if (!(line.substr(0, 1) == "#") ) {
+        if (line.substr(0, 2) == "vn") {
           // TODO: Add normals to buffer
           // // split on spaces
           // vector<string> normalAsString = PCGeneralIO::splitString(currentLine," ");
@@ -72,52 +72,80 @@ TriangleBuffer buildTriangleBuffer(vector<string> fileLines) {
           //
           // normals.push_back(tempnormal);
           //
-        } else if (currentLine.substr(0, 2) == "v ") {
-          vector<string> vertexAsString = PCGeneralIO::splitString(currentLine, " ");
+        } else if (line.substr(0, 2) == "v ") {
+          vector<string> vertexAsString = PCGeneralIO::splitString(line, " ");
           float x = PCGeneralIO::stringToReal(vertexAsString[1]);
           float y = PCGeneralIO::stringToReal(vertexAsString[2]);
           float z = PCGeneralIO::stringToReal(vertexAsString[3]);
-          buffer.push_back(*new vec4(x, y, z, 0));
+          buffer->push_back(*new vec4(x, y, z, 0));
 
-        } else if (currentLine.substr(0, 2) == "f ") {
-          vector<string> faceIndicesAsString = PCGeneralIO::splitString(currentLine, " ");
-          vector<string> aBits = PCGeneralIO::splitString(faceIndicesAsString[1], "//");
+        } else if (line.substr(0, 2) == "f ") {
+          vector<string> faceIndicesAsString = PCGeneralIO::splitString(line, " ");
+          vector<string> aBits = PCGeneralIO::splitString(faceIndicesAsString[1], "/");
           int a = PCGeneralIO::stringToInt(aBits[0]) - 1;
-          vector<string> bBits = PCGeneralIO::splitString(faceIndicesAsString[2], "//");
+          vector<string> bBits = PCGeneralIO::splitString(faceIndicesAsString[2], "/");
           int b = PCGeneralIO::stringToInt(bBits[0]) - 1;
-          vector<string> cBits = PCGeneralIO::splitString(faceIndicesAsString[3], "//");
+          vector<string> cBits = PCGeneralIO::splitString(faceIndicesAsString[3], "/");
           int c = PCGeneralIO::stringToInt(cBits[0]) - 1;
-          buffer.addVerticesForTriangle(buffer[a], buffer[b], buffer[c]);
+          buffer->addVerticesForTriangle(buffer->at(a), buffer->at(b), buffer->at(c));
         }
       }
     }
   }
+  std::cout << "END::buildTriangleBuffer()\n" << std::endl;
   return buffer;
+}
+
+void printVector(vec4 v) {
+  printf("%f, %f, %f, %f\n", v[0], v[1], v[2], v[3]);
 }
 
 /**
 * Draws triangles based on given vertices.
 * @param vertices a vector of pointers to vertices
 */
-void drawTriangles(TriangleBuffer buffer) {
-  vector<vec4> vertices = buffer.getVerticesForGlTriangles();
-  vector<vec4> normals = buffer.getNormalsForGlTriangles();
-  vector<vec4> gouraud = buffer.getGNormalsForGlTriangles();
+void drawTriangles(TriangleBuffer* buffer) {
+  std::cout << "START::drawTriangles()\n" << std::endl;
+  vector<vec4> vertices = buffer->getVerticesForGlTriangles();
+  vector<vec4> normals = buffer->getNormalsForGlTriangles();
+  vector<vec4> gouraud = buffer->getGNormalsForGlTriangles();
   glBegin(GL_TRIANGLES);
-  for (unsigned i = 0; i < vertices.size(); i++) {
-    glVertex4f(vertices[i][0], vertices[i][1], vertices[i][2], vertices[i][3]);
+  for (const vec4& v: vertices) {
+    glVertex4f(v[0], v[1], v[2], v[3]);
   }
   glEnd();
+  std::cout << "END::drawTriangles()\n" << std::endl;
+}
+
+void testTriangleBuffer(TriangleBuffer *buffer) {
+
+  std::vector<vec4> vertices = buffer->getVerticesForGlTriangles();
+  printf("getVerticesForGlTriangles:\n");
+  for (const vec4& v: vertices) {
+    printVector(v);
+  }
+  // std::vector<vec4> normals = buffer->getNormalsForGlTriangles();
+  // printf("getNormalsForGlTriangles:\n");
+  // for (const vec4& v: normals) {
+  //   printVector(v);
+  // }
+  // std::vector<vec4> gouraud = buffer->getGNormalsForGlTriangles();
+  // printf("getGNormalsForGlTriangles:\n");
+  // for (const vec4& v: gouraud) {
+  //   printVector(v);
+  // }
 }
 
 /**
  * Passed to glutDisplayFunc() as the display callback function.
  */
-void displayWithTriangles()
-{
+void displayWithTriangles() {
+  std::cout << "START::displayWithTriangles()\n" << std::endl;
   glClear(GL_COLOR_BUFFER_BIT);
-  drawTriangles(buildTriangleBuffer(readWavefrontFile("wt_teapot.obj")));
+  //drawTriangles(buildTriangleBuffer(readWavefrontFile("wt_teapot.obj")));
+  testTriangleBuffer(buildTriangleBuffer(readWavefrontFile("wt_teapot.obj")));
   glFlush();
+  std::cout << "END::displayWithTriangles()\n" << std::endl;
 }
 
 /**
