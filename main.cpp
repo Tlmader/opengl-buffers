@@ -105,7 +105,7 @@ void drawTriangles(TriangleBuffer buffer) {
   vector<vec4> gouraud = buffer.getGNormalsForGlTriangles();
   glBegin(GL_TRIANGLES);
   for (unsigned i = 0; i < vertices.size(); i++) {
-    // glVertex2f(vertices[i].getX(), vertices[i].getY());
+    glVertex4f(vertices[i][0], vertices[i][1], vertices[i][2], vertices[i][3]);
   }
   glEnd();
 }
