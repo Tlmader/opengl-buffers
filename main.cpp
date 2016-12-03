@@ -89,7 +89,7 @@ std::cout << "START::buildTriangleBuffer()" << std::endl;
       buffer->push_back(v);
 
     } else if (line.substr(0, 2) == "f ") {
-      std::cout << "f" << std::endl;
+      std::cout << "Face:" << std::endl;
       vector<string> indices = PCGeneralIO::splitString(line, " ");
       string delim = "/";
       string aBits = indices[1].substr(0, indices[1].find(delim));
@@ -118,33 +118,18 @@ void drawTriangles(TriangleBuffer* buffer) {
   vector<vec4> normals = buffer->getNormalsForGlTriangles();
   vector<vec4> gouraud = buffer->getGNormalsForGlTriangles();
   glBegin(GL_TRIANGLES);
+  int i = 3;
   for (const vec4& v: vertices) {
+    if (i % 3 == 0) {
+      i = 0;
+      std::cout << "Triangle:" << std::endl;
+    }
+    printVector(v);
     glVertex4f(v[0], v[1], v[2], v[3]);
+    i++;
   }
   glEnd();
   std::cout << "END::drawTriangles()" << std::endl;
-}
-
-void testTriangleBuffer(TriangleBuffer *buffer) {
-
-  // for (vec4 &v : *buffer) {
-  //   printVector(v);
-  // }
-  // std::vector<vec4> vertices = buffer->getVerticesForGlTriangles();
-  // printf("getVerticesForGlTriangles:\n");
-  // for (const vec4& v: vertices) {
-  //   printVector(v);
-  // }
-  // std::vector<vec4> normals = buffer->getNormalsForGlTriangles();
-  // printf("getNormalsForGlTriangles:\n");
-  // for (const vec4& v: normals) {
-  //   printVector(v);
-  // }
-  // std::vector<vec4> gouraud = buffer->getGNormalsForGlTriangles();
-  // printf("getGNormalsForGlTriangles:\n");
-  // for (const vec4& v: gouraud) {
-  //   printVector(v);
-  // }
 }
 
 /**
