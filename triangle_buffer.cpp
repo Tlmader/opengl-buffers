@@ -6,6 +6,10 @@
  * @date 2016-11-14
  */
 
+ void printTriangleVector(vec4 v) {
+   printf("%f, %f, %f, %f\n", v[0], v[1], v[2], v[3]);
+ }
+
 TriangleBuffer::TriangleBuffer() {
 }
 
@@ -83,16 +87,18 @@ std::vector<vec4> TriangleBuffer::getGNormalsForGlTriangles() {
 }
 
 vec4 &TriangleBuffer::replaceIfExists(vec4 &v) {
-  std::cout << "START::TriangleBuffer->replaceIfExists()" << std::endl;
+  // std::cout << "START::TriangleBuffer->replaceIfExists()" << std::endl;
   std::vector<vec4>::iterator it = std::find_if(this->begin(), this->end(),
     [v, this](vec4 const i) {
       return vectorsEqual(v, i);
     });
   if (it != this->end()) {
-    std::cout << "END::TriangleBuffer->replaceIfExists()::REPLACE" << std::endl;
+    // std::cout << "END::TriangleBuffer->replaceIfExists()::REPLACE" << std::endl;
+    // printTriangleVector(v);
+    // printTriangleVector(*it);
     return *it;
   }
-  std::cout << "END::TriangleBuffer->replaceIfExists()::KEEP" << std::endl;
+  // std::cout << "END::TriangleBuffer->replaceIfExists()::KEEP" << std::endl;
   return v;
 }
 

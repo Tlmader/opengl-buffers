@@ -6,6 +6,9 @@
  * @date 2016-11-14
  */
 
+MeshBuffer::MeshBuffer() {
+}
+
 MeshBuffer::MeshBuffer(vec4 &a, vec4 &b) {
   vector::push_back(a);
   vector::push_back(b);
