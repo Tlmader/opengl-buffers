@@ -78,24 +78,29 @@ std::cout << "START::buildTriangleBuffer()" << std::endl;
       // normals.push_back(tempnormal);
       //
     } else if (line.substr(0, 2) == "v ") {
-      std::cout << "v" << std::endl;
+      std::cout << "Vertex:" << std::endl;
       vector<string> vertexAsString = PCGeneralIO::splitString(line, " ");
-      float x = PCGeneralIO::stringToReal(vertexAsString[1]);
-      float y = PCGeneralIO::stringToReal(vertexAsString[2]);
-      float z = PCGeneralIO::stringToReal(vertexAsString[3]);
+      string::size_type sz;
+      float x = atof(vertexAsString[1].c_str());
+      float y = atof(vertexAsString[2].c_str());
+      float z = atof(vertexAsString[3].c_str());
       vec4 v = *new vec4(x, y, z, 0);
       printVector(v);
       buffer->push_back(v);
 
     } else if (line.substr(0, 2) == "f ") {
       std::cout << "f" << std::endl;
-      vector<string> faceIndicesAsString = PCGeneralIO::splitString(line, " ");
-      vector<string> aBits = PCGeneralIO::splitString(faceIndicesAsString[1], "/");
-      int a = PCGeneralIO::stringToInt(aBits[0]) - 1;
-      vector<string> bBits = PCGeneralIO::splitString(faceIndicesAsString[2], "/");
-      int b = PCGeneralIO::stringToInt(bBits[0]) - 1;
-      vector<string> cBits = PCGeneralIO::splitString(faceIndicesAsString[3], "/");
-      int c = PCGeneralIO::stringToInt(cBits[0]) - 1;
+      vector<string> indices = PCGeneralIO::splitString(line, " ");
+      string delim = "/";
+      string aBits = indices[1].substr(0, indices[1].find(delim));
+      int a = atoi(aBits.c_str()) - 1;
+      string bBits = indices[2].substr(0, indices[2].find(delim));
+      int b = atoi(bBits.c_str()) - 1;
+      string cBits = indices[3].substr(0, indices[3].find(delim));
+      int c = atoi(cBits.c_str()) - 1;
+      printVector(buffer->at(a));
+      printVector(buffer->at(b));
+      printVector(buffer->at(c));
       buffer->addVerticesForTriangle(buffer->at(a), buffer->at(b), buffer->at(c));
     }
   }
@@ -180,8 +185,7 @@ void printUsage() {
  * @param argv the array of arguments
  */
 int main(int argc, char *argv[]) {
-  testTriangleBuffer(buildTriangleBuffer(readWavefrontFile("test_cube.obj")));
-  return EXIT_SUCCESS;
+  // testTriangleBuffer(buildTriangleBuffer(readWavefrontFile("test_cube.obj")));
   if (argc < 2) {
     printUsage();
     return EXIT_SUCCESS;
