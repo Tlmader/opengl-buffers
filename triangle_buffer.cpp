@@ -18,8 +18,8 @@ TriangleBuffer::TriangleBuffer(vec4 &a, vec4 &b, vec4 &c) {
 
 void TriangleBuffer::addVerticesForTriangle(vec4 &a, vec4 &b, vec4 &c) {
   if (vectorsEqual(a, b) ||
-      vectorsEqual(a, c) ||
-      vectorsEqual(b, c)) {
+      vectorsEqual(b, c) ||
+      vectorsEqual(c, a)) {
     return;
   }
   a = replaceIfExists(a);
@@ -83,13 +83,16 @@ std::vector<vec4> TriangleBuffer::getGNormalsForGlTriangles() {
 }
 
 vec4 &TriangleBuffer::replaceIfExists(vec4 &v) {
+  std::cout << "START::TriangleBuffer->replaceIfExists()" << std::endl;
   std::vector<vec4>::iterator it = std::find_if(this->begin(), this->end(),
     [v, this](vec4 const i) {
       return vectorsEqual(v, i);
     });
   if (it != this->end()) {
+    std::cout << "END::TriangleBuffer->replaceIfExists()::REPLACE" << std::endl;
     return *it;
   }
+  std::cout << "END::TriangleBuffer->replaceIfExists()::KEEP" << std::endl;
   return v;
 }
 
