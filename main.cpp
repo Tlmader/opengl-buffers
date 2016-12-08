@@ -254,17 +254,18 @@ int main(int argc, char *argv[]) {
     printUsage();
     return EXIT_SUCCESS;
   }
+  string filename = "wt_teapot.obj";
   std::string arg = argv[1];
   int flag = 0;
   if (arg == "-m" || arg == "--mesh") {
     flag = 1;
-    buildMeshBuffer(readWavefrontFile("wt_teapot.obj"));
-  } else if (arg == "-t" || arg == "--triangle") {
+    buildMeshBuffer(readWavefrontFile(filename));
+  } else if (arg == "-f" || arg == "--flat") {
     flag = 2;
-    buildTriangleBuffer(readWavefrontFile("wt_teapot.obj"));
-  } else if (arg == "-t" || arg == "--triangle") {
+    buildTriangleBuffer(readWavefrontFile(filename));
+  } else if (arg == "-g" || arg == "--gouraud") {
     flag = 3;
-    buildTriangleBuffer(readWavefrontFile("wt_teapot.obj"));
+    buildTriangleBuffer(readWavefrontFile(filename));
   } else {
     printUsage();
     return EXIT_SUCCESS;
