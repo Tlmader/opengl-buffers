@@ -2,6 +2,7 @@
 #define TRIANGLE_BUFFER_H
 
 #include <vector>
+#include <algorithm>
 #include "triangle.hpp"
 #include "include/Angel.h"
 
@@ -13,6 +14,16 @@
 class TriangleBuffer : public std::vector<vec4> {
 
 public:
+
+  /**
+   * Constructs an empty TriangleBuffer.
+   * @param v1 a vec4
+   * @param v2 a vec4
+   * @param p3 a vec4
+   * @return the constructed Buffer
+   */
+  TriangleBuffer();
+
   /**
    * Constructs a TriangleBuffer with a single Triangle.
    * @param v1 a vec4

@@ -2,6 +2,7 @@
 #define MESH_BUFFER_H
 
 #include <vector>
+#include <algorithm>
 #include "line.hpp"
 
 /**
@@ -12,6 +13,15 @@
 class MeshBuffer : public std::vector<vec4> {
 
 public:
+
+  /**
+   * Constructs an empty MeshBuffer.
+   * @param v1 a vec4
+   * @param v2 a vec4
+   * @return the constructed Buffer
+   */
+  MeshBuffer();
+
   /**
    * Constructs a MeshBuffer with a single Line.
    * @param v1 a vec4

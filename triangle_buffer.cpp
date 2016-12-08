@@ -1,5 +1,3 @@
-#pragma GCC diagnostic ignored "-Wc++11-extensions"
-
 #include "triangle_buffer.hpp"
 
 /**
@@ -8,43 +6,50 @@
  * @date 2016-11-14
  */
 
+ void printTriangleVector(vec4 v) {
+   printf("%f, %f, %f, %f\n", v[0], v[1], v[2], v[3]);
+ }
+
+TriangleBuffer::TriangleBuffer() {
+}
+
 TriangleBuffer::TriangleBuffer(vec4 &a, vec4 &b, vec4 &c) {
-  vector::push_back(a);
-  vector::push_back(b);
-  vector::push_back(c);
+  this->push_back(a);
+  this->push_back(b);
+  this->push_back(c);
   triangles.push_back(*new Triangle(a, b, c));
 }
 
 void TriangleBuffer::addVerticesForTriangle(vec4 &a, vec4 &b, vec4 &c) {
   if (vectorsEqual(a, b) ||
-      vectorsEqual(a, c) ||
-      vectorsEqual(b, c)) {
+      vectorsEqual(b, c) ||
+      vectorsEqual(c, a)) {
     return;
   }
   a = replaceIfExists(a);
   b = replaceIfExists(b);
   c = replaceIfExists(c);
-  vector::push_back(a);
-  vector::push_back(b);
-  vector::push_back(c);
+  this->push_back(a);
+  this->push_back(b);
+  this->push_back(c);
   triangles.push_back(*new Triangle(a, b, c));
 }
 
 void TriangleBuffer::addVertexAndLinkExisting(int i, int j, vec4 &v) {
-  if (vectorsEqual(vector::at(i), v) ||
-      vectorsEqual(vector::at(j), v)) {
+  if (vectorsEqual(this->at(i), v) ||
+      vectorsEqual(this->at(j), v)) {
     return;
   }
   v = replaceIfExists(v);
-  vector::push_back(v);
-  triangles.push_back(*new Triangle(vector::at(i), vector::at(j), v));
+  this->push_back(v);
+  triangles.push_back(*new Triangle(this->at(i), this->at(j), v));
 }
 
 void TriangleBuffer::modifyVertex(int i, vec4 &v) {
   if (std::find(this->begin(), this->end(), v) != this->end()) {
     return;
   }
-  vector::at(i).operator=(v);
+  this->at(i).operator=(v);
 }
 
 std::vector<vec4> TriangleBuffer::getVerticesForGlTriangles() {
@@ -82,13 +87,18 @@ std::vector<vec4> TriangleBuffer::getGNormalsForGlTriangles() {
 }
 
 vec4 &TriangleBuffer::replaceIfExists(vec4 &v) {
+  // std::cout << "START::TriangleBuffer->replaceIfExists()" << std::endl;
   std::vector<vec4>::iterator it = std::find_if(this->begin(), this->end(),
     [v, this](vec4 const i) {
       return vectorsEqual(v, i);
     });
   if (it != this->end()) {
+    // std::cout << "END::TriangleBuffer->replaceIfExists()::REPLACE" << std::endl;
+    // printTriangleVector(v);
+    // printTriangleVector(*it);
     return *it;
   }
+  // std::cout << "END::TriangleBuffer->replaceIfExists()::KEEP" << std::endl;
   return v;
 }
 

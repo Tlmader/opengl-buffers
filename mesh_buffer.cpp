@@ -1,5 +1,3 @@
-#pragma GCC diagnostic ignored "-Wc++11-extensions"
-
 #include "mesh_buffer.hpp"
 
 /**
@@ -8,37 +6,49 @@
  * @date 2016-11-14
  */
 
+void printMeshVector(vec4 v) {
+  printf("%f, %f, %f, %f\n", v[0], v[1], v[2], v[3]);
+}
+
+MeshBuffer::MeshBuffer() {
+}
+
 MeshBuffer::MeshBuffer(vec4 &a, vec4 &b) {
-  vector::push_back(a);
-  vector::push_back(b);
+  this->push_back(a);
+  this->push_back(b);
   lines.push_back(*new Line(a, b));
 }
 
 void MeshBuffer::addVerticesForLine(vec4 &a, vec4 &b) {
+std::cout << "START::addVerticesForLine()" << std::endl;
   if (vectorsEqual(a, b)) {
     return;
   }
   a = replaceIfExists(a);
   b = replaceIfExists(b);
-  vector::push_back(a);
-  vector::push_back(b);
-  lines.push_back(*new Line(a, b));
+  this->push_back(a);
+  this->push_back(b);
+  Line l = *new Line(a, b);
+  lines.push_back(l);
+  printMeshVector(l.getA());
+  printMeshVector(l.getB());
+  std::cout << "END::addVerticesForLine()" << std::endl;
 }
 
 void MeshBuffer::addVertexAndLinkExisting(int i, vec4 &v) {
-  if (vectorsEqual(vector::at(i), v)) {
+  if (vectorsEqual(this->at(i), v)) {
     return;
   }
   v = replaceIfExists(v);
-  vector::push_back(v);
-  lines.push_back(*new Line(vector::at(i), v));
+  this->push_back(v);
+  lines.push_back(*new Line(this->at(i), v));
 }
 
 void MeshBuffer::modifyVertex(int i, vec4 &v) {
   if (std::find(this->begin(), this->end(), v) != this->end()) {
     return;
   }
-  vector::at(i).operator=(v);
+  this->at(i).operator=(v);
 }
 
 std::vector<vec4> MeshBuffer::getVerticesForGlLines() {
