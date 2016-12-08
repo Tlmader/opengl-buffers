@@ -8,9 +8,9 @@ Reads in a Utah teapot data file. The program may switch between different imple
 2. ```./render.exe [flags]```
 
 #### Flags:
-* [-m | --mesh]: Display the teapot as a "wire" mesh. I.e., draw lines, rather than triangle primitives.
-* [-f | --flat]: Display the teapot using flat shading. I.e., for a given primitive, the normals are the same for every vertex.
-* [-g | --gouraud]: Display the teapot using Gouraud shading. I.e., each vertex is assigned the average of the normals of the primitives in which it is a part.
+* ```[-m | --mesh]```: Display the teapot as a "wire" mesh. I.e., draw lines, rather than triangle primitives.
+* ```[-f | --flat]```: Display the teapot using flat shading. I.e., for a given primitive, the normals are the same for every vertex.
+* ```[-g | --gouraud]```: Display the teapot using Gouraud shading. I.e., each vertex is assigned the average of the normals of the primitives in which it is a part.
 
 #### Class MeshBuffer includes:
 * A function to add a “line” or “edge” to the mesh, such that the vertices are not duplicated.
