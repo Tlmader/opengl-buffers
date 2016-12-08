@@ -150,7 +150,7 @@ void drawMesh() {
 }
 
 /**
-* Draws triangles based on given vertices.
+* Draws faces with flat shading based on given vertices.
 * @param vertices a vector of pointers to vertices
 */
 void drawFlat() {
@@ -163,12 +163,13 @@ void drawFlat() {
       glNormal3f(normals[i / 3][0], normals[i / 3][1], normals[i / 3][2]);
       printVector(normals[i / 3]);
     }
+    glVertex4f(vertices[i][0], vertices[i][1], vertices[i][2], vertices[i][3]);
   }
   glEnd();
 }
 
 /**
-* Draws triangles based on given vertices.
+* Draws faces with vertex shading based on given vertices.
 * @param vertices a vector of pointers to vertices
 */
 void drawGouraud() {
@@ -176,13 +177,6 @@ void drawGouraud() {
   vector<vec4> gouraud = g_tBuffer->getGNormalsForGlTriangles();
   glBegin(GL_TRIANGLES);
   for (unsigned int i = 0; i < vertices.size(); i++) {
-    // if (i % 3 == 0) {
-    //   printf("%d:: ", i / 3);
-    //   glNormal3f(normals[i / 3][0], normals[i / 3][1], normals[i / 3][2]);
-    //   printVector(normals[i / 3]);
-    //   // printVector(g_tNormals->at(i / 3));
-    //   // glNormal3f(g_tNormals->at(i / 3)[0], g_tNormals->at(i / 3)[1], g_tNormals->at(i / 3)[2]);
-    // }
     glNormal3f(gouraud[i][0], gouraud[i][1], gouraud[i][2]);
     glVertex4f(vertices[i][0], vertices[i][1], vertices[i][2], vertices[i][3]);
   }
@@ -193,33 +187,27 @@ void drawGouraud() {
  * Passed to glutDisplayFunc() as the display callback function.
  */
 void displayWithMesh() {
-  std::cout << "\nSTART::displayWithMeshes()\n" << std::endl;
   glClear(GL_COLOR_BUFFER_BIT);
   drawMesh();
   glFlush();
-  std::cout << "\nEND::displayWithMeshes()\n" << std::endl;
 }
 
 /**
  * Passed to glutDisplayFunc() as the display callback function.
  */
 void displayWithFlat() {
-  std::cout << "\nSTART::displayWithTriangles()\n" << std::endl;
   glClear(GL_COLOR_BUFFER_BIT);
   drawFlat();
   glFlush();
-  std::cout << "\nEND::displayWithTriangles()\n" << std::endl;
 }
 
 /**
  * Passed to glutDisplayFunc() as the display callback function.
  */
 void displayWithGouraud() {
-  std::cout << "\nSTART::displayWithTriangles()\n" << std::endl;
   glClear(GL_COLOR_BUFFER_BIT);
   drawGouraud();
   glFlush();
-  std::cout << "\nEND::displayWithTriangles()\n" << std::endl;
 }
 
 /**
