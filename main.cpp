@@ -261,7 +261,7 @@ int main(int argc, char *argv[]) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGBA);
   glutInitWindowSize(512, 512);
-  glutCreateWindow("csci4631-hw5");
+  glutCreateWindow("render.exe");
   if (flag == 1) {
     glutDisplayFunc(displayWithMesh);
   } else if (flag == 2) {
