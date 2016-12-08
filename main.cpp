@@ -28,7 +28,6 @@ TriangleBuffer *g_tBuffer;
  * @return the vector of strings
  */
 vector<string> readWavefrontFile(const string &path) {
-  std::cout << "START::readWavefrontFile()" << std::endl;
   // open an input file stream
   ifstream inFile;
   inFile.open(path.c_str());
@@ -48,7 +47,6 @@ vector<string> readWavefrontFile(const string &path) {
     }
   }
   inFile.close();
-  std::cout << "END::readWavefrontFile()" << std::endl;
   return fileLines;
 }
 
@@ -62,26 +60,10 @@ void printVector(vec4 v) {
  * @return the TriangleBuffer
  */
 void buildMeshBuffer(vector<string> fileLines) {
-std::cout << "START::buildMeshBuffer()" << std::endl;
   g_mBuffer = new MeshBuffer();
   vector<vec4> *vecs = new vector<vec4>;
   for (const string line : fileLines) {
-    if (line.substr(0, 2) == "vn") {
-      // TODO: Add normals to buffer
-      // // split on spaces
-      // vector<string> normalAsString = PCGeneralIO::splitString(currentLine," ");
-      // float x = PCGeneralIO::stringToReal(normalAsString[1]);
-      // float y = PCGeneralIO::stringToReal(normalAsString[2]);
-      // float z = PCGeneralIO::stringToReal(normalAsString[3]);
-      //
-      // vector<float> tempnormal;
-      // tempnormal.push_back(x);
-      // tempnormal.push_back(y);
-      // tempnormal.push_back(z);
-      //
-      // normals.push_back(tempnormal);
-      //
-    } else if (line.substr(0, 2) == "v ") {
+    if (line.substr(0, 2) == "v ") {
       std::cout << "Vertex:" << std::endl;
       vector<string> vertexAsString = PCGeneralIO::splitString(line, " ");
       string::size_type sz;
@@ -101,21 +83,11 @@ std::cout << "START::buildMeshBuffer()" << std::endl;
       int b = atoi(bBits.c_str()) - 1;
       string cBits = indices[3].substr(0, indices[3].find(delim));
       int c = atoi(cBits.c_str()) - 1;
-        std::cout << "Line:" << std::endl;
-        printVector(vecs->at(a));
-        printVector(vecs->at(b));
-        std::cout << "Line:" << std::endl;
-        printVector(vecs->at(b));
-        printVector(vecs->at(c));
-        std::cout << "Line:" << std::endl;
-        printVector(vecs->at(c));
-        printVector(vecs->at(a));
       g_mBuffer->addVerticesForLine(vecs->at(a), vecs->at(b));
       g_mBuffer->addVerticesForLine(vecs->at(b), vecs->at(c));
       g_mBuffer->addVerticesForLine(vecs->at(c), vecs->at(a));
     }
   }
-  std::cout << "END::buildMeshBuffer()" << std::endl;
 }
 
 /**
@@ -124,8 +96,8 @@ std::cout << "START::buildMeshBuffer()" << std::endl;
  * @return the TriangleBuffer
  */
 void buildTriangleBuffer(vector<string> fileLines) {
-std::cout << "START::buildTriangleBuffer()" << std::endl;
   g_tBuffer = new TriangleBuffer();
+  vector<vec4> *vecs = new vector<vec4>;
   for (const string line : fileLines) {
     if (line.substr(0, 2) == "vn") {
       // TODO: Add normals to buffer
@@ -143,18 +115,15 @@ std::cout << "START::buildTriangleBuffer()" << std::endl;
       // normals.push_back(tempnormal);
       //
     } else if (line.substr(0, 2) == "v ") {
-      std::cout << "Vertex:" << std::endl;
       vector<string> vertexAsString = PCGeneralIO::splitString(line, " ");
       string::size_type sz;
       float x = atof(vertexAsString[1].c_str());
       float y = atof(vertexAsString[2].c_str());
       float z = atof(vertexAsString[3].c_str());
       vec4 v = *new vec4(x, y, z, 0);
-      printVector(v);
-      g_tBuffer->push_back(v);
+      vecs->push_back(v);
 
     } else if (line.substr(0, 2) == "f ") {
-      std::cout << "Face:" << std::endl;
       vector<string> indices = PCGeneralIO::splitString(line, " ");
       string delim = "/";
       string aBits = indices[1].substr(0, indices[1].find(delim));
@@ -163,13 +132,9 @@ std::cout << "START::buildTriangleBuffer()" << std::endl;
       int b = atoi(bBits.c_str()) - 1;
       string cBits = indices[3].substr(0, indices[3].find(delim));
       int c = atoi(cBits.c_str()) - 1;
-      printVector(g_tBuffer->at(a));
-      printVector(g_tBuffer->at(b));
-      printVector(g_tBuffer->at(c));
-      g_tBuffer->addVerticesForTriangle(g_tBuffer->at(a), g_tBuffer->at(b), g_tBuffer->at(c));
+      g_tBuffer->addVerticesForTriangle(vecs->at(a), vecs->at(b), vecs->at(c));
     }
   }
-  std::cout << "END::buildTriangleBuffer()" << std::endl;
 }
 
 /**
@@ -177,15 +142,14 @@ std::cout << "START::buildTriangleBuffer()" << std::endl;
 * @param vertices a vector of pointers to vertices
 */
 void drawMeshes() {
-  std::cout << "START::drawMeshes()" << std::endl;
   vector<vec4> vertices = g_mBuffer->getVerticesForGlLines();
   glBegin(GL_LINES);
-  int i = 1;
+  int i = 0;
   for (const vec4& v: vertices) {
-    i++;
     if (i % 2 == 0) {
       std::cout << "Line:" << std::endl;
     }
+    i++;
     printVector(v);
     glVertex4f(v[0], v[1], v[2], v[3]);
   }
@@ -197,42 +161,42 @@ void drawMeshes() {
 * @param vertices a vector of pointers to vertices
 */
 void drawTriangles() {
-  std::cout << "START::drawTriangles()" << std::endl;
   vector<vec4> vertices = g_tBuffer->getVerticesForGlTriangles();
   vector<vec4> normals = g_tBuffer->getNormalsForGlTriangles();
   vector<vec4> gouraud = g_tBuffer->getGNormalsForGlTriangles();
   glBegin(GL_TRIANGLES);
-  for (unsigned int i = 0; i < vertices.size(); i++) {
-    if ((i - 1) % 3 == 0) {
+  int i = 0;
+  for (const vec4& v: vertices) {
+    if (i % 3 == 0) {
       std::cout << "Triangle:" << std::endl;
     }
-    printVector(vertices[i]);
-    glVertex4f(vertices[i][0], vertices[i][1], vertices[i][2], vertices[i][3]);
+    i++;
+    printVector(v);
+    glVertex4f(v[0], v[1], v[2], v[3]);
   }
   glEnd();
-  std::cout << "END::drawTriangles()" << std::endl;
 }
 
 /**
  * Passed to glutDisplayFunc() as the display callback function.
  */
 void displayWithMeshes() {
-  std::cout << "START::displayWithMeshes()\n" << std::endl;
+  std::cout << "\nSTART::displayWithMeshes()\n" << std::endl;
   glClear(GL_COLOR_BUFFER_BIT);
   drawMeshes();
   glFlush();
-  std::cout << "END::displayWithMeshes()\n" << std::endl;
+  std::cout << "\nEND::displayWithMeshes()\n" << std::endl;
 }
 
 /**
  * Passed to glutDisplayFunc() as the display callback function.
  */
 void displayWithTriangles() {
-  std::cout << "START::displayWithTriangles()\n" << std::endl;
+  std::cout << "\nSTART::displayWithTriangles()\n" << std::endl;
   glClear(GL_COLOR_BUFFER_BIT);
   drawTriangles();
   glFlush();
-  std::cout << "END::displayWithTriangles()\n" << std::endl;
+  std::cout << "\nEND::displayWithTriangles()\n" << std::endl;
 }
 
 /**
