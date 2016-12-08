@@ -158,13 +158,15 @@ void drawTriangles() {
   vector<vec4> normals = g_tBuffer->getNormalsForGlTriangles();
   vector<vec4> gouraud = g_tBuffer->getGNormalsForGlTriangles();
   glBegin(GL_TRIANGLES);
-  int j = 0;
   for (unsigned int i = 0; i < vertices.size(); i++) {
-    if (i % 3) {
-      glNormal3f(g_tNormals->at(j)[0], g_tNormals->at(j)[1], g_tNormals->at(j)[2]);
-      // glNormal3f(normals[j][0], normals[j][1], normals[j][2]);
-      j++;
-    }
+    // if (i % 3 == 0) {
+    //   printf("%d:: ", i / 3);
+    //   glNormal3f(normals[i / 3][0], normals[i / 3][1], normals[i / 3][2]);
+    //   printVector(normals[i / 3]);
+    //   // printVector(g_tNormals->at(i / 3));
+    //   // glNormal3f(g_tNormals->at(i / 3)[0], g_tNormals->at(i / 3)[1], g_tNormals->at(i / 3)[2]);
+    // }
+    glNormal3f(gouraud[i][0], gouraud[i][1], gouraud[i][2]);
     glVertex4f(vertices[i][0], vertices[i][1], vertices[i][2], vertices[i][3]);
   }
   glEnd();
