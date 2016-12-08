@@ -165,14 +165,16 @@ void drawTriangles() {
   vector<vec4> normals = g_tBuffer->getNormalsForGlTriangles();
   vector<vec4> gouraud = g_tBuffer->getGNormalsForGlTriangles();
   glBegin(GL_TRIANGLES);
-  int i = 0;
-  for (const vec4& v: vertices) {
+  int j = 0;
+  for (unsigned int i = 0; i < vertices.size(); i++) {
     if (i % 3 == 0) {
       std::cout << "Triangle:" << std::endl;
+      glNormal3f(normals[j][0], normals[j][1], normals[j][2]);
+      j++;
     }
     i++;
-    printVector(v);
-    glVertex4f(v[0], v[1], v[2], v[3]);
+    // glNormal3f(gouraud[i][0], gouraud[i][1], gouraud[i][2]);
+    glVertex3f(vertices[i][0], vertices[i][1], vertices[i][2]);
   }
   glEnd();
 }
@@ -235,10 +237,10 @@ int main(int argc, char *argv[]) {
   bool useMesh = true;
   if (arg == "-m" || arg == "--mesh") {
     useMesh = true;
-    buildMeshBuffer(readWavefrontFile("test_cube.obj"));
+    buildMeshBuffer(readWavefrontFile("wt_teapot.obj"));
   } else if (arg == "-t" || arg == "--triangle") {
     useMesh = false;
-    buildTriangleBuffer(readWavefrontFile("test_cube.obj"));
+    buildTriangleBuffer(readWavefrontFile("wt_teapot.obj"));
   } else {
     printUsage();
     return EXIT_SUCCESS;
