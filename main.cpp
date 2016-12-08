@@ -186,6 +186,7 @@ void drawMeshes() {
     if (i % 2 == 0) {
       std::cout << "Line:" << std::endl;
     }
+    printVector(v);
     glVertex4f(v[0], v[1], v[2], v[3]);
   }
   glEnd();
@@ -278,16 +279,16 @@ int main(int argc, char *argv[]) {
     printUsage();
     return EXIT_SUCCESS;
   }
-  // glutInit(&argc, argv);
-  // glutInitDisplayMode(GLUT_RGBA);
-  // glutInitWindowSize(512, 512);
-  // glutCreateWindow("csci4631-hw5");
-  // if (useMesh) {
-  //   glutDisplayFunc(displayWithMeshes); // TODO: Draw triangle function
-  // } else {
-  //   glutDisplayFunc(displayWithTriangles); // TODO: Draw mesh function
-  // }
-  // glutKeyboardFunc(keyboard);
-  // glutMainLoop();
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_RGBA);
+  glutInitWindowSize(512, 512);
+  glutCreateWindow("csci4631-hw5");
+  if (useMesh) {
+    glutDisplayFunc(displayWithMeshes); // TODO: Draw triangle function
+  } else {
+    glutDisplayFunc(displayWithTriangles); // TODO: Draw mesh function
+  }
+  glutKeyboardFunc(keyboard);
+  glutMainLoop();
   return EXIT_SUCCESS;
 }
