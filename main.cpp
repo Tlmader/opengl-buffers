@@ -70,7 +70,7 @@ void buildMeshBuffer(vector<string> fileLines) {
       float x = atof(vertexAsString[1].c_str());
       float y = atof(vertexAsString[2].c_str());
       float z = atof(vertexAsString[3].c_str());
-      vec4 v = *new vec4(x, y, z, 0);
+      vec4 v = *new vec4(x, y, z, 1);
       printVector(v);
       vecs->push_back(v);
 
@@ -120,7 +120,7 @@ void buildTriangleBuffer(vector<string> fileLines) {
       float x = atof(vertexAsString[1].c_str());
       float y = atof(vertexAsString[2].c_str());
       float z = atof(vertexAsString[3].c_str());
-      vec4 v = *new vec4(x, y, z, 0);
+      vec4 v = *new vec4(x, y, z, 1);
       vecs->push_back(v);
 
     } else if (line.substr(0, 2) == "f ") {
@@ -141,7 +141,7 @@ void buildTriangleBuffer(vector<string> fileLines) {
 * Draws triangles based on given vertices.
 * @param vertices a vector of pointers to vertices
 */
-void drawMeshes() {
+void drawLines() {
   vector<vec4> vertices = g_mBuffer->getVerticesForGlLines();
   glBegin(GL_LINES);
   int i = 0;
@@ -183,7 +183,7 @@ void drawTriangles() {
 void displayWithMeshes() {
   std::cout << "\nSTART::displayWithMeshes()\n" << std::endl;
   glClear(GL_COLOR_BUFFER_BIT);
-  drawMeshes();
+  drawLines();
   glFlush();
   std::cout << "\nEND::displayWithMeshes()\n" << std::endl;
 }
