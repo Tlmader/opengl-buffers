@@ -21,7 +21,6 @@
 using namespace std;
 
 MeshBuffer *g_mBuffer;
-vector<vec4> g_mLineVertices;
 TriangleBuffer *g_tBuffer;
 
 /**
@@ -65,6 +64,7 @@ void printVector(vec4 v) {
 void buildMeshBuffer(vector<string> fileLines) {
 std::cout << "START::buildMeshBuffer()" << std::endl;
   g_mBuffer = new MeshBuffer();
+  vector<vec4> *vecs = new vector<vec4>;
   for (const string line : fileLines) {
     if (line.substr(0, 2) == "vn") {
       // TODO: Add normals to buffer
@@ -90,7 +90,7 @@ std::cout << "START::buildMeshBuffer()" << std::endl;
       float z = atof(vertexAsString[3].c_str());
       vec4 v = *new vec4(x, y, z, 0);
       printVector(v);
-      g_mBuffer->push_back(v);
+      vecs->push_back(v);
 
     } else if (line.substr(0, 2) == "f ") {
       vector<string> indices = PCGeneralIO::splitString(line, " ");
@@ -102,17 +102,17 @@ std::cout << "START::buildMeshBuffer()" << std::endl;
       string cBits = indices[3].substr(0, indices[3].find(delim));
       int c = atoi(cBits.c_str()) - 1;
         std::cout << "Line:" << std::endl;
-        printVector(g_mBuffer->at(a));
-        printVector(g_mBuffer->at(b));
+        printVector(vecs->at(a));
+        printVector(vecs->at(b));
         std::cout << "Line:" << std::endl;
-        printVector(g_mBuffer->at(b));
-        printVector(g_mBuffer->at(c));
+        printVector(vecs->at(b));
+        printVector(vecs->at(c));
         std::cout << "Line:" << std::endl;
-        printVector(g_mBuffer->at(c));
-        printVector(g_mBuffer->at(a));
-      g_mBuffer->addVerticesForLine(g_mBuffer->at(a), g_mBuffer->at(b));
-      g_mBuffer->addVerticesForLine(g_mBuffer->at(b), g_mBuffer->at(c));
-      g_mBuffer->addVerticesForLine(g_mBuffer->at(c), g_mBuffer->at(a));
+        printVector(vecs->at(c));
+        printVector(vecs->at(a));
+      g_mBuffer->addVerticesForLine(vecs->at(a), vecs->at(b));
+      g_mBuffer->addVerticesForLine(vecs->at(b), vecs->at(c));
+      g_mBuffer->addVerticesForLine(vecs->at(c), vecs->at(a));
     }
   }
   std::cout << "END::buildMeshBuffer()" << std::endl;
@@ -180,13 +180,12 @@ void drawMeshes() {
   std::cout << "START::drawMeshes()" << std::endl;
   vector<vec4> vertices = g_mBuffer->getVerticesForGlLines();
   glBegin(GL_LINES);
-  int i = 0;
-  for (const vec4& v: g_mLineVertices) {
-    if ((i - 1) % 2 == 0) {
+  int i = 1;
+  for (const vec4& v: vertices) {
+    i++;
+    if (i % 2 == 0) {
       std::cout << "Line:" << std::endl;
     }
-    i++;
-    printVector(v);
     glVertex4f(v[0], v[1], v[2], v[3]);
   }
   glEnd();
@@ -272,15 +271,6 @@ int main(int argc, char *argv[]) {
   if (arg == "-m" || arg == "--mesh") {
     useMesh = true;
     buildMeshBuffer(readWavefrontFile("test_cube.obj"));
-    g_mLineVertices = g_mBuffer->getVerticesForGlLines();
-    int i = 0;
-    for (const vec4& v: g_mLineVertices) {
-      if ((i - 1) % 2 == 0) {
-        std::cout << "Line:" << std::endl;
-      }
-      i++;
-      printVector(v);
-    }
   } else if (arg == "-t" || arg == "--triangle") {
     useMesh = false;
     buildTriangleBuffer(readWavefrontFile("test_cube.obj"));
