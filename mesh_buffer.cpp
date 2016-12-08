@@ -6,12 +6,16 @@
  * @date 2016-11-14
  */
 
+void printMeshVector(vec4 v) {
+  printf("%f, %f, %f, %f\n", v[0], v[1], v[2], v[3]);
+}
+
 MeshBuffer::MeshBuffer() {
 }
 
 MeshBuffer::MeshBuffer(vec4 &a, vec4 &b) {
-  vector::push_back(a);
-  vector::push_back(b);
+  this->push_back(a);
+  this->push_back(b);
   lines.push_back(*new Line(a, b));
 }
 
@@ -21,34 +25,40 @@ void MeshBuffer::addVerticesForLine(vec4 &a, vec4 &b) {
   }
   a = replaceIfExists(a);
   b = replaceIfExists(b);
-  vector::push_back(a);
-  vector::push_back(b);
+  this->push_back(a);
+  this->push_back(b);
   lines.push_back(*new Line(a, b));
 }
 
 void MeshBuffer::addVertexAndLinkExisting(int i, vec4 &v) {
-  if (vectorsEqual(vector::at(i), v)) {
+  if (vectorsEqual(this->at(i), v)) {
     return;
   }
   v = replaceIfExists(v);
-  vector::push_back(v);
-  lines.push_back(*new Line(vector::at(i), v));
+  this->push_back(v);
+  lines.push_back(*new Line(this->at(i), v));
 }
 
 void MeshBuffer::modifyVertex(int i, vec4 &v) {
   if (std::find(this->begin(), this->end(), v) != this->end()) {
     return;
   }
-  vector::at(i).operator=(v);
+  this->at(i).operator=(v);
 }
 
 std::vector<vec4> MeshBuffer::getVerticesForGlLines() {
+  std::cout << "START::MeshBuffer::getVerticesForGlLines()" << std::endl;
   std::vector<vec4> vertices;
   for (const Line& l : lines) {
+    std::cout << "A" << std::endl;
+    printMeshVector(l.getA());
+    std::cout << "B" << std::endl;
+    printMeshVector(l.getB());
     vertices.push_back(l.getA());
     vertices.push_back(l.getB());
   }
   return vertices;
+  std::cout << "END::MeshBuffer::getVerticesForGlLines()" << std::endl;
 }
 
 vec4 &MeshBuffer::replaceIfExists(vec4 &v) {

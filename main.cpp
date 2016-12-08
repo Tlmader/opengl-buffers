@@ -123,7 +123,7 @@ std::cout << "START::buildMeshBuffer()" << std::endl;
  * @param fileLines a vector of strings
  * @return the TriangleBuffer
  */
-void *buildTriangleBuffer(vector<string> fileLines) {
+void buildTriangleBuffer(vector<string> fileLines) {
 std::cout << "START::buildTriangleBuffer()" << std::endl;
   g_tBuffer = new TriangleBuffer();
   for (const string line : fileLines) {
