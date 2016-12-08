@@ -22,6 +22,7 @@ using namespace std;
 
 MeshBuffer *g_mBuffer;
 TriangleBuffer *g_tBuffer;
+vector<vec3> *g_tNormals;
 
 /**
  * Reads a Wavefront object file and returns a vector containing the data.
@@ -97,26 +98,19 @@ void buildMeshBuffer(vector<string> fileLines) {
  */
 void buildTriangleBuffer(vector<string> fileLines) {
   g_tBuffer = new TriangleBuffer();
+  g_tNormals = new vector<vec3>();
   vector<vec4> *vecs = new vector<vec4>;
   for (const string line : fileLines) {
-    if (line.substr(0, 2) == "vn") {
-      // TODO: Add normals to buffer
-      // // split on spaces
-      // vector<string> normalAsString = PCGeneralIO::splitString(currentLine," ");
-      // float x = PCGeneralIO::stringToReal(normalAsString[1]);
-      // float y = PCGeneralIO::stringToReal(normalAsString[2]);
-      // float z = PCGeneralIO::stringToReal(normalAsString[3]);
-      //
-      // vector<float> tempnormal;
-      // tempnormal.push_back(x);
-      // tempnormal.push_back(y);
-      // tempnormal.push_back(z);
-      //
-      // normals.push_back(tempnormal);
-      //
+    if (line.substr(0, 3) == "vn ") {
+      vector<string> normalAsString = PCGeneralIO::splitString(line, " ");
+      float x = atof(normalAsString[1].c_str());
+      float y = atof(normalAsString[2].c_str());
+      float z = atof(normalAsString[3].c_str());
+      vec3 n = *new vec3(x, y, z);
+      g_tNormals->push_back(n);
+
     } else if (line.substr(0, 2) == "v ") {
       vector<string> vertexAsString = PCGeneralIO::splitString(line, " ");
-      string::size_type sz;
       float x = atof(vertexAsString[1].c_str());
       float y = atof(vertexAsString[2].c_str());
       float z = atof(vertexAsString[3].c_str());
@@ -149,7 +143,6 @@ void drawLines() {
     if (i % 2 == 0) {
       std::cout << "Line:" << std::endl;
     }
-    i++;
     printVector(v);
     glVertex4f(v[0], v[1], v[2], v[3]);
   }
@@ -167,14 +160,12 @@ void drawTriangles() {
   glBegin(GL_TRIANGLES);
   int j = 0;
   for (unsigned int i = 0; i < vertices.size(); i++) {
-    if (i % 3 == 0) {
-      std::cout << "Triangle:" << std::endl;
-      glNormal3f(normals[j][0], normals[j][1], normals[j][2]);
+    if (i % 3) {
+      glNormal3f(g_tNormals->at(j)[0], g_tNormals->at(j)[1], g_tNormals->at(j)[2]);
+      // glNormal3f(normals[j][0], normals[j][1], normals[j][2]);
       j++;
     }
-    i++;
-    // glNormal3f(gouraud[i][0], gouraud[i][1], gouraud[i][2]);
-    glVertex3f(vertices[i][0], vertices[i][1], vertices[i][2]);
+    glVertex4f(vertices[i][0], vertices[i][1], vertices[i][2], vertices[i][3]);
   }
   glEnd();
 }
