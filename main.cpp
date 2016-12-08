@@ -21,6 +21,7 @@
 using namespace std;
 
 MeshBuffer *g_mBuffer;
+vector<vec4> g_mLineVertices;
 TriangleBuffer *g_tBuffer;
 
 /**
@@ -61,7 +62,7 @@ void printVector(vec4 v) {
  * @param fileLines a vector of strings
  * @return the TriangleBuffer
  */
-void *buildMeshBuffer(vector<string> fileLines) {
+void buildMeshBuffer(vector<string> fileLines) {
 std::cout << "START::buildMeshBuffer()" << std::endl;
   g_mBuffer = new MeshBuffer();
   for (const string line : fileLines) {
@@ -115,7 +116,6 @@ std::cout << "START::buildMeshBuffer()" << std::endl;
     }
   }
   std::cout << "END::buildMeshBuffer()" << std::endl;
-  return g_mBuffer;
 }
 
 /**
@@ -180,15 +180,16 @@ void drawMeshes() {
   std::cout << "START::drawMeshes()" << std::endl;
   vector<vec4> vertices = g_mBuffer->getVerticesForGlLines();
   glBegin(GL_LINES);
-  for (unsigned int i = 0; i < vertices.size(); i++) {
+  int i = 0;
+  for (const vec4& v: g_mLineVertices) {
     if ((i - 1) % 2 == 0) {
       std::cout << "Line:" << std::endl;
     }
-    printVector(vertices[i]);
-    glVertex4f(vertices[i][0], vertices[i][1], vertices[i][2], vertices[i][3]);
+    i++;
+    printVector(v);
+    glVertex4f(v[0], v[1], v[2], v[3]);
   }
   glEnd();
-  std::cout << "END::drawMeshes()" << std::endl;
 }
 
 /**
@@ -271,6 +272,15 @@ int main(int argc, char *argv[]) {
   if (arg == "-m" || arg == "--mesh") {
     useMesh = true;
     buildMeshBuffer(readWavefrontFile("test_cube.obj"));
+    g_mLineVertices = g_mBuffer->getVerticesForGlLines();
+    int i = 0;
+    for (const vec4& v: g_mLineVertices) {
+      if ((i - 1) % 2 == 0) {
+        std::cout << "Line:" << std::endl;
+      }
+      i++;
+      printVector(v);
+    }
   } else if (arg == "-t" || arg == "--triangle") {
     useMesh = false;
     buildTriangleBuffer(readWavefrontFile("test_cube.obj"));
@@ -278,16 +288,16 @@ int main(int argc, char *argv[]) {
     printUsage();
     return EXIT_SUCCESS;
   }
-  glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_RGBA);
-  glutInitWindowSize(512, 512);
-  glutCreateWindow("csci4631-hw5");
-  if (useMesh) {
-    glutDisplayFunc(displayWithMeshes); // TODO: Draw triangle function
-  } else {
-    glutDisplayFunc(displayWithTriangles); // TODO: Draw mesh function
-  }
-  glutKeyboardFunc(keyboard);
-  glutMainLoop();
+  // glutInit(&argc, argv);
+  // glutInitDisplayMode(GLUT_RGBA);
+  // glutInitWindowSize(512, 512);
+  // glutCreateWindow("csci4631-hw5");
+  // if (useMesh) {
+  //   glutDisplayFunc(displayWithMeshes); // TODO: Draw triangle function
+  // } else {
+  //   glutDisplayFunc(displayWithTriangles); // TODO: Draw mesh function
+  // }
+  // glutKeyboardFunc(keyboard);
+  // glutMainLoop();
   return EXIT_SUCCESS;
 }
