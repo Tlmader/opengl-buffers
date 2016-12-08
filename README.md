@@ -4,8 +4,8 @@ Renders an arbitrary number of lines (for meshes) or polygons (for rendering sol
 Reads in a Utah teapot data file. The program may switch between different implementations using command-line flags:
 
 #### Run:
-1. make
-2. ./render.exe [flags]
+1. ```make```
+2. ```./render.exe [flags]```
 
 #### Flags:
 * [-m | --mesh]: Display the teapot as a "wire" mesh. I.e., draw lines, rather than triangle primitives.
