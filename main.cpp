@@ -135,7 +135,7 @@ void buildTriangleBuffer(vector<string> fileLines) {
 * Draws triangles based on given vertices.
 * @param vertices a vector of pointers to vertices
 */
-void drawLines() {
+void drawMesh() {
   vector<vec4> vertices = g_mBuffer->getVerticesForGlLines();
   glBegin(GL_LINES);
   int i = 0;
@@ -153,9 +153,26 @@ void drawLines() {
 * Draws triangles based on given vertices.
 * @param vertices a vector of pointers to vertices
 */
-void drawTriangles() {
+void drawFlat() {
   vector<vec4> vertices = g_tBuffer->getVerticesForGlTriangles();
   vector<vec4> normals = g_tBuffer->getNormalsForGlTriangles();
+  glBegin(GL_TRIANGLES);
+  for (unsigned int i = 0; i < vertices.size(); i++) {
+    if (i % 3 == 0) {
+      printf("%d:: ", i / 3);
+      glNormal3f(normals[i / 3][0], normals[i / 3][1], normals[i / 3][2]);
+      printVector(normals[i / 3]);
+    }
+  }
+  glEnd();
+}
+
+/**
+* Draws triangles based on given vertices.
+* @param vertices a vector of pointers to vertices
+*/
+void drawGouraud() {
+  vector<vec4> vertices = g_tBuffer->getVerticesForGlTriangles();
   vector<vec4> gouraud = g_tBuffer->getGNormalsForGlTriangles();
   glBegin(GL_TRIANGLES);
   for (unsigned int i = 0; i < vertices.size(); i++) {
@@ -175,10 +192,10 @@ void drawTriangles() {
 /**
  * Passed to glutDisplayFunc() as the display callback function.
  */
-void displayWithMeshes() {
+void displayWithMesh() {
   std::cout << "\nSTART::displayWithMeshes()\n" << std::endl;
   glClear(GL_COLOR_BUFFER_BIT);
-  drawLines();
+  drawMesh();
   glFlush();
   std::cout << "\nEND::displayWithMeshes()\n" << std::endl;
 }
@@ -186,10 +203,21 @@ void displayWithMeshes() {
 /**
  * Passed to glutDisplayFunc() as the display callback function.
  */
-void displayWithTriangles() {
+void displayWithFlat() {
   std::cout << "\nSTART::displayWithTriangles()\n" << std::endl;
   glClear(GL_COLOR_BUFFER_BIT);
-  drawTriangles();
+  drawFlat();
+  glFlush();
+  std::cout << "\nEND::displayWithTriangles()\n" << std::endl;
+}
+
+/**
+ * Passed to glutDisplayFunc() as the display callback function.
+ */
+void displayWithGouraud() {
+  std::cout << "\nSTART::displayWithTriangles()\n" << std::endl;
+  glClear(GL_COLOR_BUFFER_BIT);
+  drawGouraud();
   glFlush();
   std::cout << "\nEND::displayWithTriangles()\n" << std::endl;
 }
@@ -212,7 +240,7 @@ void keyboard(unsigned char key, int x, int y) {
  * Prints proper usage of render.exe if parameters are unknown
  */
 void printUsage() {
-  std::cout << "usage: ./render.exe [-m | --mesh] -t | --triangle]\n" << std::endl;
+  std::cout << "usage: ./render.exe [-m | --mesh || -f | --flat || -g | --gouraud]\n" << std::endl;
 }
 
 /**
@@ -227,12 +255,15 @@ int main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
   }
   std::string arg = argv[1];
-  bool useMesh = true;
+  int flag = 0;
   if (arg == "-m" || arg == "--mesh") {
-    useMesh = true;
+    flag = 1;
     buildMeshBuffer(readWavefrontFile("wt_teapot.obj"));
   } else if (arg == "-t" || arg == "--triangle") {
-    useMesh = false;
+    flag = 2;
+    buildTriangleBuffer(readWavefrontFile("wt_teapot.obj"));
+  } else if (arg == "-t" || arg == "--triangle") {
+    flag = 3;
     buildTriangleBuffer(readWavefrontFile("wt_teapot.obj"));
   } else {
     printUsage();
@@ -242,10 +273,12 @@ int main(int argc, char *argv[]) {
   glutInitDisplayMode(GLUT_RGBA);
   glutInitWindowSize(512, 512);
   glutCreateWindow("csci4631-hw5");
-  if (useMesh) {
-    glutDisplayFunc(displayWithMeshes); // TODO: Draw triangle function
-  } else {
-    glutDisplayFunc(displayWithTriangles); // TODO: Draw mesh function
+  if (flag == 1) {
+    glutDisplayFunc(displayWithMesh);
+  } else if (flag == 2) {
+    glutDisplayFunc(displayWithFlat);
+  } else if (flag == 3) {
+    glutDisplayFunc(displayWithGouraud);
   }
   glutKeyboardFunc(keyboard);
   glutMainLoop();
